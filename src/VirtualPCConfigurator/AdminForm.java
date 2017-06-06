@@ -337,18 +337,18 @@ public class AdminForm {
                plogin.setVisible(true);
                pcomps.setVisible(false);
                
-               try
-               {
-                dbconn.closeall();
+               /*try
+               {*/
+                
                 jbtlogin.setEnabled(true);
                 disconnect.setEnabled(false);
                 
                 
-               }
+               /*}
                catch(SQLException e)
                {
                    
-               }
+               }*/
            }
             
         });
@@ -764,7 +764,7 @@ public class AdminForm {
                      selected = true;
                      TableModel tMB = jMB.getModel();
                      
-                     
+                     if(c!= 0)
                      buffer = tMB.getValueAt(c, 0)+"#"+tMB.getValueAt(c, 1)+"#"+tMB.getValueAt(c, 2)+"#"+tMB.getValueAt(c, 3)+"#"+tMB.getValueAt(c, 4)+"#"+tMB.getValueAt(c, 5)+"#"+tMB.getValueAt(c, 6)+"#"+tMB.getValueAt(c, 7)+"#"+tMB.getValueAt(c, 8);
                      
                      
@@ -772,6 +772,7 @@ public class AdminForm {
              }
 
         });
+        
         
         updateMB();
         pMB.add(spMB);

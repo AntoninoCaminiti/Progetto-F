@@ -47,8 +47,9 @@ public class DBConnection
         
         
         try{
-            Class.forName("com.mysql.jdbc.Driver");  
-            conn = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11176424?autoReconnect=true&useSSL=false", user, pass);
+            Class.forName("org.sqlite.JDBC");  
+            conn = DriverManager.getConnection("jdbc:sqlite:Components.db");
+            //conn = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11176424?autoReconnect=true&useSSL=false", user, pass);
             mystmt = conn.createStatement();
             
             }
@@ -454,7 +455,9 @@ public void removeFromHDrive(String brand, String model, String serie, String fo
         try{
         test.setUP("AdminKing", "SuperAMG2017#");
         test.Connect();
-        test.removeFromHDrive("str1", "str2", "str3", "str4", "str5", 1, 2, 3, 4.0);
+        
+        //test.viewDB();
+        //test.removeFromHDrive("str1", "str2", "str3", "str4", "str5", 1, 2, 3, 4.0);
         //test.removeFromMotherBoard("First string field", "Second string field", "Third string field", "Fourth string field", "Fifth string field", 4,5,2,2.0);
         
         //test.viewDB();

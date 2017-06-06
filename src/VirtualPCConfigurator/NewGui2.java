@@ -37,14 +37,14 @@ public class NewGui2{
      DecimalFormat dc1 = new DecimalFormat("0.00 W");
      
      
-    Double cpuPrice;
-    Double mbPrice;
-    Double hdrivePrice;
-    Double gcardPrice;
-    Double psPrice;
-    Double ramPrice;
+    Double [] cpuPrice = new Double[100];
+    Double [] mbPrice = new Double[100];
+    Double [] hdrivePrice = new Double[100];
+    Double [] gcardPrice = new Double[100];
+    Double [] psPrice = new Double[100];
+    Double [] ramPrice = new Double[100];
      
-     
+
     private String user = "sql11176424";
     private String pass = "fDFSkH9nVq";
         
@@ -111,16 +111,26 @@ public class NewGui2{
         {
             Connect();
             res = mystmt.executeQuery("select * from cpu");
-            
+            int i = 0;
             while(res.next())
             {
                 
                 model.addElement(res.getString(1)+" "+res.getString(2));
-                cpuPrice = res.getDouble(8);
+                cpuPrice[i] = res.getDouble(8);
+                
                 P1.add(list1);
                 list1.setVisibleRowCount(1);
-               
-            list1.addListSelectionListener(new ListSelectionListener() {  
+               i++;
+            
+            }
+            
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+        
+        list1.addListSelectionListener(new ListSelectionListener() {  
               
                 public void valueChanged(ListSelectionEvent e) {   
                     String data = "";  
@@ -137,31 +147,35 @@ public class NewGui2{
                     
                 }
             });    
-        }
-            
-        }
-        catch(SQLException ex)
-        {
-            
-        }
+        
         
          DefaultListModel model1=new DefaultListModel();
                 
         list2=new JList(model1);
         try
         {
+            int i = 0;
             Connect();
             res = mystmt.executeQuery("select * from RAM");
             while(res.next())
             {
                 
                 model1.addElement(res.getString(1)+" "+res.getString(2)+" "+res.getInt(6)+" "+res.getInt(7)+"GB");
-                ramPrice = res.getDouble(9);
+                ramPrice[i] = res.getDouble(9);
                 
                 P2.add(list2);
                 list2.setVisibleRowCount(1);
-               
-            list2.addListSelectionListener(new ListSelectionListener() {  
+               i++;
+              
+            }
+         
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+        
+        list2.addListSelectionListener(new ListSelectionListener() {  
               
                 public void valueChanged(ListSelectionEvent e) {   
                     String data = "";  
@@ -175,14 +189,7 @@ public class NewGui2{
                    } 
                     
                 }
-            });    
-        }
-         
-        }
-        catch(SQLException ex)
-        {
-            
-        }
+            });  
         
         DefaultListModel model2=new DefaultListModel();
                 
@@ -191,15 +198,27 @@ public class NewGui2{
         {
             Connect();
             res = mystmt.executeQuery("select * from hdrive");
+            int i=0;
+            
             while(res.next())
             {
                 
                 model2.addElement(res.getString(1)+" "+res.getString(2)+" "+res.getInt(6)+"GB");
                
-                hdrivePrice = res.getDouble(9);
+                hdrivePrice[i] = res.getDouble(9);
                 //final JList list1=new JList(model1);
+                i++;
                 
-                P3.add(list3);
+        }
+            
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+        
+        
+        P3.add(list3);
                 list3.setVisibleRowCount(1);
                
             list3.addListSelectionListener(new ListSelectionListener() {  
@@ -217,13 +236,6 @@ public class NewGui2{
                     
                 }
             });    
-        }
-            
-        }
-        catch(SQLException ex)
-        {
-            
-        }
         
         DefaultListModel model3=new DefaultListModel();
                 
@@ -232,13 +244,15 @@ public class NewGui2{
         {
             Connect();
             res = mystmt.executeQuery("select * from motherboard");
+            int i = 0;
             while(res.next())
             {
                 
                 model3.addElement(res.getString(1)+" "+res.getString(2));
                
-                mbPrice = res.getDouble(9);
+                mbPrice[i] = res.getDouble(9);
                 //final JList list1=new JList(model1);
+                i++;
                 
                 P4.add(list4);
                 list4.setVisibleRowCount(1);
@@ -272,16 +286,28 @@ public class NewGui2{
         {
             Connect();
             res = mystmt.executeQuery("select * from gcard");
+            int i = 0;
             while(res.next())
             {
                 
                 model4.addElement(res.getString(1)+" "+res.getString(2));
                
                 
-                gcardPrice = res.getDouble(8);
-                //final JList list1=new JList(model1);
+                gcardPrice[i] = res.getDouble(8);
                 
-                P5.add(list5);
+                //final JList list1=new JList(model1);
+                i++;
+                
+        }
+            
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+        
+        
+        P5.add(list5);
                 list5.setVisibleRowCount(1);
                
             list5.addListSelectionListener(new ListSelectionListener() {  
@@ -299,13 +325,8 @@ public class NewGui2{
                     
                 }
             });    
-        }
-            
-        }
-        catch(SQLException ex)
-        {
-            
-        }
+        
+        
         DefaultListModel model5=new DefaultListModel();
                 
         list6=new JList(model5);
@@ -313,15 +334,24 @@ public class NewGui2{
         {
             Connect();
             res = mystmt.executeQuery("select * from PS");
+            int i = 0;
             while(res.next())
             {
                 
                 model5.addElement(res.getString(1)+" "+res.getString(2));
                
-                psPrice = res.getDouble(8);
+                psPrice[i] = res.getDouble(8);
                 //final JList list1=new JList(model1);
                 
-                P6.add(list6);
+                
+        }
+           
+        }
+        catch(SQLException ex)
+        {
+        }  
+        
+        P6.add(list6);
                 list6.setVisibleRowCount(1);
                
             list6.addListSelectionListener(new ListSelectionListener() {  
@@ -339,14 +369,6 @@ public class NewGui2{
                     
                 }
             });    
-        }
-           
-        }
-        catch(SQLException ex)
-        {
-        }  
-        
-        
         
         
         
@@ -429,8 +451,10 @@ public class NewGui2{
     public void Connect() throws SQLException{
         
         try{
-            Class.forName("com.mysql.jdbc.Driver");  
-            conn = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11176424?autoReconnect=true&useSSL=false", user, pass);
+            Class.forName("org.sqlite.JDBC");  
+            conn = DriverManager.getConnection("jdbc:sqlite:Components.db");
+            /*Class.forName("com.mysql.jdbc.Driver");  
+            conn = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11176424?autoReconnect=true&useSSL=false", user, pass);*/
             mystmt = conn.createStatement();
             
             }
@@ -495,7 +519,7 @@ public class NewGui2{
          
         //Processor: Add base system price to subtotal:
         if (list1.getSelectedIndex()!= -1){
-            calc.AddToSubTotal(cpuPrice);
+            calc.AddToSubTotal(cpuPrice[list1.getSelectedIndex()]);
             //wt.AddToSubTotal(upANDadd.GetIntProc01());
             dblSubTotal = calc.GetSubTotal();
             intSubTotal = wt.GetSubTotal();
@@ -505,7 +529,7 @@ public class NewGui2{
         //Memory: Add  base system price to subtotal:
         
          if (list2.getSelectedIndex()!= -1){
-            calc.AddToSubTotal(ramPrice);
+            calc.AddToSubTotal(ramPrice[list2.getSelectedIndex()]);
             //wt.AddToSubTotal(upANDadd.GetIntProc01());
             dblSubTotal = calc.GetSubTotal();
             intSubTotal = wt.GetSubTotal();
@@ -514,7 +538,7 @@ public class NewGui2{
         //HDD: Add  base system price to subtotal:
         
         if (list3.getSelectedIndex()!= -1){
-            calc.AddToSubTotal(hdrivePrice);
+            calc.AddToSubTotal(hdrivePrice[list3.getSelectedIndex()]);
             //wt.AddToSubTotal(upANDadd.GetIntProc01());
             dblSubTotal = calc.GetSubTotal();
             intSubTotal = wt.GetSubTotal();
@@ -523,7 +547,7 @@ public class NewGui2{
          //GC: Add  base system price to subtotal:
         
          if (list4.getSelectedIndex()!= -1){
-            calc.AddToSubTotal(gcardPrice);
+            calc.AddToSubTotal(mbPrice[list4.getSelectedIndex()]);
             //wt.AddToSubTotal(upANDadd.GetIntProc01());
             dblSubTotal = calc.GetSubTotal();
             intSubTotal = wt.GetSubTotal();
@@ -532,15 +556,16 @@ public class NewGui2{
         // Motherboard 
         
         if (list5.getSelectedIndex()!= -1){
-            calc.AddToSubTotal(mbPrice);
+            calc.AddToSubTotal(gcardPrice[list5.getSelectedIndex()]);
             //wt.AddToSubTotal(upANDadd.GetIntProc01());
             dblSubTotal = calc.GetSubTotal();
             intSubTotal = wt.GetSubTotal();
         }
         
         
-         if (list5.getSelectedIndex()!= -1){
-            calc.AddToSubTotal(psPrice);
+         if (list6
+                 .getSelectedIndex()!= -1){
+            calc.AddToSubTotal(psPrice[list6.getSelectedIndex()]);
             //wt.AddToSubTotal(upANDadd.GetIntProc01());
             dblSubTotal = calc.GetSubTotal();
             intSubTotal = wt.GetSubTotal();
@@ -557,8 +582,8 @@ public class NewGui2{
         strSubTotal1 = dc1.format(intSubTotal);
         
         //Displays in text box:
-        T5.setText(strSubTotal);
-        T8.setText(strSubTotal1);
+        T8.setText(strSubTotal);
+        //T8.setText(strSubTotal1);
         
     }
     
