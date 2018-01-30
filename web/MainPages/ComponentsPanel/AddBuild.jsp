@@ -25,10 +25,10 @@
         mystmt = db.Connect();
         
         int ress;
-        ress = mystmt.executeUpdate("insert into purchases (MCOD, CPUCOD, RCOD, GCOD, HCOD, PCOD, CSCOD) values('"+mbcod+"', '"+cpucod+"', '"+ramcod+"', '"+gccod+"', '"+hdcod+"', '"+pscod+"', '"+casecod+"')");   
+        ress = mystmt.executeUpdate("insert into PURCHASES (MCOD, CPUCOD, RCOD, GCOD, HCOD, PCOD, CSCOD) values('"+mbcod+"', '"+cpucod+"', '"+ramcod+"', '"+gccod+"', '"+hdcod+"', '"+pscod+"', '"+casecod+"')");   
         
         /*Estrapolare codice del purchase inserito*/
-        res = mystmt.executeQuery("SELECT COD FROM purchases");
+        res = mystmt.executeQuery("SELECT COD FROM PURCHASES");
         
         int actualCod = 0;
         while (res.next()){

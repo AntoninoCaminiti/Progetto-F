@@ -5,37 +5,83 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
-    String mbcod = (String) request.getSession().getAttribute("mbCod");
+    String mbcod = null;
     String mbField = null;
-    if(mbcod!=null)
+    if(request.getSession().getAttribute("mbCod")!=null)
     {
-        mbField = new ComponentParser().getComponent("MOTHERBOARD", mbcod);
+        mbcod = (String) request.getSession().getAttribute("mbCod");
     }
-    String cpucod = (String) request.getSession().getAttribute("cpuCod");
-    String cpuField = null;
-    if(cpucod!=null)
+    
+    if(request.getSession().getAttribute("mbCod")==null)
     {
-        cpuField = new ComponentParser().getComponent("CPU", cpucod);
+        mbcod = new CookiesHandler().getCookie("MBCOD", request);
+       
     }
-
-    String ramcod = (String) request.getSession().getAttribute("ramCod");
+    mbField = new ComponentParser().getComponent("MOTHERBOARD", mbcod).replace("-CC-", " ");
+    String cpucod = null;
+    
+    if(request.getSession().getAttribute("cpuCod")!=null)
+    {
+        cpucod = new ComponentParser().getComponent("CPU", cpucod);
+    }
+    if(request.getSession().getAttribute("cpuCod")==null)
+    {
+        cpucod = new CookiesHandler().getCookie("CPUCOD", request);
+       
+    }
+    
+    String cpuField = new ComponentParser().getComponent("CPU", cpucod).replace("-CC-", " ");
+    
+    
+    String ramcod = null;
+    
+    request.getSession().setAttribute("ramCod", ramcod);
+    
+    confSave.setRAMCod(ramcod);
+    session.setAttribute("confSave", confSave);
     String ramField = null;
-    if(ramcod!=null)
+    if(request.getSession().getAttribute("ramCod")!=null)
     {
-        ramField = new ComponentParser().getComponent("RAM", ramcod);
+        ramcod = new ComponentParser().getComponent("RAM", ramcod);
+    }
+    if(request.getSession().getAttribute("ramCod")==null)
+    {
+        ramcod = new CookiesHandler().getCookie("RAMCOD", request);
+       
     }
     
-    String gccod = request.getParameter("gcCod");
-    request.getSession().setAttribute("gcCod",gccod);
-    //confSave.setGCCod(gccod);
-    //session.setAttribute("confSave",confsave);
+    ramField = new ComponentParser().getComponent("RAM", ramcod).replace("-CC-", " ");
+    
+    String gccod = null;
+    
+    request.getSession().setAttribute("gcCod", gccod);
+    
+    confSave.setGCCod(gccod);
+    session.setAttribute("confSave", confSave);
     String gcField = null;
-    if(gccod!=null)
+    if(request.getSession().getAttribute("gcCod")!=null)
     {
-        gcField = new ComponentParser().getComponent("GRAPHICS_CARD", gccod);
+        gccod = new ComponentParser().getComponent("GRAPHICS_CARD", gccod);
+    }
+    if(request.getSession().getAttribute("gcCod")==null)
+    {
+        gccod = new CookiesHandler().getCookie("GCCOD", request);
+       
     }
     
-    Double price = Double.parseDouble(request.getParameter("price"));
+    gcField = new ComponentParser().getComponent("GRAPHICS_CARD", gccod).replace("-CC-", " ");
+    
+    
+    Double price = null;
+    if(request.getParameter("price") != null){
+        price = Double.parseDouble(request.getParameter("price"));
+        new Cookie("PRICE", request.getParameter("price"));
+    }
+    if(request.getParameter("price")==null)
+    {
+        price = Double.parseDouble(new CookiesHandler().getCookie("PRICE", request));
+    }    
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -108,6 +154,7 @@
                     document.getElementById("hdCod").value = this.cells[9].innerHTML;
                     document.getElementById("price").value = document.getElementById("priceField").value;
                     document.getElementById("nextbtn").disabled = false;
+                    document.cookie = "HDCOD=" + document.getElementById("hdCod").value;
                     };
                 }
             </script>

@@ -15,16 +15,17 @@ public class ComponentParser extends DBConnection {
     }
     public String getComponent(String table, String cod) throws SQLException
     {
-        String output = null;
+        String output = "";
         
         res = stmt.executeQuery("select * from " + table + " where cod = " + cod);
             while(res.next())
             {
                 output = res.getString(2) + "-CC-" + res.getString(3);
             }
-            this.closeall();   
+           
+        this.closeall();   
         return output;
-    }
+    }                                                                                                                                                                                   
     
     
     public String getPrice(ArrayList data) throws SQLException
@@ -42,7 +43,7 @@ public class ComponentParser extends DBConnection {
         
         for(int i = 0; i < tables.size(); i++)
         {            
-            System.out.println(tables.get(i) + " " + data.get(i));
+            //System.out.println(tables.get(i) + " " + data.get(i));
             res = stmt.executeQuery("select PRICE from " + tables.get(i)  + " where COD = "+ data.get(i));
             while(res.next())
             {
@@ -53,10 +54,11 @@ public class ComponentParser extends DBConnection {
         
         return pricef.format(price);
     }
-    /*
+    
     public static void main(String[] args) {
         try{
         ComponentParser c = new ComponentParser();
+            System.out.println(c.getComponent("MOTHERBOARD", "1007"));
         ArrayList<String> a = new ArrayList<>();
         a.add("1003");
         a.add("2011");
@@ -71,5 +73,5 @@ public class ComponentParser extends DBConnection {
         {
             System.err.println(e);
         }
-    }*/
+    }
 }

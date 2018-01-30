@@ -47,7 +47,7 @@
                         mystmt = db.Connect();
                         /**/
                         String userid = (String) request.getSession().getAttribute("userid");
-                        res = mystmt.executeQuery("select save.MCOD, save.CPUCOD, save.RCOD, save.GCOD, save.HCOD, save.PCOD, save.CSCOD from customerlogin join (select pur.MCOD, pur.CPUCOD, pur.RCOD, pur.GCOD, pur.HCOD, pur.PCOD, pur.CSCOD, sa.SAVECOD from SAVES as sa join PURCHASES as pur where sa.PURCOD = pur.COD) as save where save.SAVECOD = customerlogin.USERSAVE and USERNAME = '"+ userid +"' ");
+                        res = mystmt.executeQuery("select save.MCOD, save.CPUCOD, save.RCOD, save.GCOD, save.HCOD, save.PCOD, save.CSCOD from CustomerLogin join (select pur.MCOD, pur.CPUCOD, pur.RCOD, pur.GCOD, pur.HCOD, pur.PCOD, pur.CSCOD, sa.SAVECOD from SAVES as sa join PURCHASES as pur where sa.PURCOD = pur.COD) as save where save.SAVECOD = CustomerLogin.USERSAVE and USERNAME = '"+ userid +"' ");
                         /*Tabella intestazione*/
                         out.print("<table id=\"tableBuild\" class=\"tableSection\">");
                         out.print("<thead>");
@@ -86,7 +86,7 @@
                         out.print("</table>");
                     }
                     catch(SQLException ex){
-                        out.println("You must login first <a href='javascript:history.go(-1);'> Try again </a>");
+                        out.println("You must login first <a href='javascript:history.go(-1);'> Try again </a>" + ex);
                     }
                 %>
             </div>
