@@ -15,9 +15,9 @@ public class ComponentParser extends DBConnection {
     }
     public String getComponent(String table, String cod) throws SQLException
     {
-        String output = "";
+        String output = " ";
         
-        res = stmt.executeQuery("select * from " + table + " where cod = " + cod);
+        res = stmt.executeQuery("select * from " + table + " where cod = " + cod.trim());
             while(res.next())
             {
                 output = res.getString(2) + "-CC-" + res.getString(3);
@@ -58,7 +58,7 @@ public class ComponentParser extends DBConnection {
     public static void main(String[] args) {
         try{
         ComponentParser c = new ComponentParser();
-            System.out.println(c.getComponent("MOTHERBOARD", "1007"));
+            System.out.println(c.getComponent("HDRIVE", "5002"));
         ArrayList<String> a = new ArrayList<>();
         a.add("1003");
         a.add("2011");
