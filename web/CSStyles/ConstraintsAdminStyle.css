@@ -41,7 +41,7 @@ grid-template-areas:
     ". ."
     "header header"
     "navbar navbar"
-    "content insidebar"
+    "content content"
     "footer footer";
 }
 .header {
