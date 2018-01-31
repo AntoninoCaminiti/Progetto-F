@@ -39,8 +39,9 @@
 
 <html>
     <head>
-	<title> ADMINISTRATION MODE </title>
-	<link rel="stylesheet" href="../../CSStyles/UpdateDBCompStyle.css">
+	<title> ADMIN MODE </title>
+	<link rel="stylesheet" href="../../CSStyles/ConstraintsAdminStyle.css">
+        <link rel="icon" href="./../../CSStyles/projectIcon.png" type="image/png"/>
     </head>
     <body>
         <div class="grid">
@@ -54,30 +55,32 @@
             <%}%>
             </div>
             <div class="navbar">
-                <input type="button" value="Motherboard" name="motherboard" onclick="location.href='MotherboardPage.jsp'"/>
-                <input type="button" value="CPU" name="cpu" onclick="location.href='CpuPage.jsp'"/>
-                <input type="button" value="RAM" name="ram" onclick="location.href='RamPage.jsp'"/>
-                <input type="button" value="Graphics Card" name="gcard" onclick="location.href='GCardPage.jsp'"/>
-                <input type="button" value="Hard Disk" name="hdisk" onclick="location.href='HDiskPage.jsp'"/>
-                <input type="button" value="Power Supply" name="powersupply" onclick="location.href='PowerSupplyPage.jsp'"/>
-                <input type="button" value="Case" name="case" onclick="location.href='CasePage.jsp'"/>
-                <input type="button" value="Constraints" name="constraints" onclick="location.href='ConstraintsPage.jsp'"/>
+                <input type="button" class="btn" value="Motherboard" name="motherboard" onclick="location.href='MotherboardPage.jsp'"/>
+                <input type="button" class="btn" value="CPU" name="cpu" onclick="location.href='CpuPage.jsp'"/>
+                <input type="button" class="btn" value="RAM" name="ram" onclick="location.href='RamPage.jsp'"/>
+                <input type="button" class="btn" value="Graphics Card" name="gcard" onclick="location.href='GCardPage.jsp'"/>
+                <input type="button" class="btn" value="Hard Disk" name="hdisk" onclick="location.href='HDiskPage.jsp'"/>
+                <input type="button" class="btn" value="Power Supply" name="powersupply" onclick="location.href='PowerSupplyPage.jsp'"/>
+                <input type="button" class="btn" value="Case" name="case" onclick="location.href='CasePage.jsp'"/>
+                <input type="button" class="btn" value="Constraints" name="constraints" onclick="location.href='ConstraintsPage.jsp'"/>
             </div>
             <div class="content">
-                <form action="../AddPage/EditConstraints.jsp" method="POST">
-                    <input type ="hidden" id="cpustatus" name="cpustatus" />
-                    <input type ="hidden" id="ramstatus" name="ramstatus" />
-                    <p>
-                    <input type="checkbox" onclick="setCPU()" id="CPUFlag" name="CPUFlag" value="" <% out.print(inputCPUtype); %>>CPU Filtering</input>
-                    </p>
-                    <p>
-                    <input type="checkbox" onclick="setRAM()" id="RAMFlag" name="RAMFlag" value="" <% out.print(inputRAMtype); %>>RAM Filtering</input>
-                    </p>
-                    <p>
-                    <input type="submit"  value="Aggiorna"/>
-                    </p>
-                </form>
-                
+                <center>
+                    <h1>Tick which constraint want to set:</h1>
+                    <form action="../AddPage/EditConstraints.jsp" method="POST">
+                        <input type ="hidden" id="cpustatus" name="cpustatus" />
+                        <input type ="hidden" id="ramstatus" name="ramstatus" />
+                        <p>
+                            <input type="checkbox" onclick="setCPU()" id="CPUFlag" name="CPUFlag" value="" <% out.print(inputCPUtype); %>>CPU Filtering</input>
+                        </p>
+                        <p>
+                            <input type="checkbox" onclick="setRAM()" id="RAMFlag" name="RAMFlag" value="" <% out.print(inputRAMtype); %>>RAM Filtering</input>
+                        </p>
+                        <p>
+                            <input type="submit" class="btn" value="Update"/>
+                        </p>
+                    </form>
+                </center>
             </div>
             <div class="insidebar"></div>
             <div class="footer"></div>
