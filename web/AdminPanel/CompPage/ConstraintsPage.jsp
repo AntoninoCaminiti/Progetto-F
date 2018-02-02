@@ -62,7 +62,7 @@
                 <input type="button" class="btn" value="Hard Disk" name="hdisk" onclick="location.href='HDiskPage.jsp'"/>
                 <input type="button" class="btn" value="Power Supply" name="powersupply" onclick="location.href='PowerSupplyPage.jsp'"/>
                 <input type="button" class="btn" value="Case" name="case" onclick="location.href='CasePage.jsp'"/>
-                <input type="button" class="btn" value="Constraints" name="constraints" onclick="location.href='ConstraintsPage.jsp'"/>
+                <input type="button" class="btn" value="Admin Settings" name="constraints" onclick="location.href='ConstraintsPage.jsp'"/>
             </div>
             <div class="content">
                 <center>
@@ -82,7 +82,26 @@
                     </form>
                 </center>
             </div>
-            <div class="insidebar"></div>
+            <div class="insidebar">
+                <center>
+                    <h1>Add New Admin Account:</h1>
+                    <form action="../AddPage/AddAdmin.jsp" method="post">
+                        <table id="insertTable" border="0">
+                            <tr>	
+                                <td><label>Username:</label></td>
+                                <td><input type="text" id="uAdmin" name="uAdmin" required></td>
+                            </tr>
+                            <tr>	
+                                <td><label>Password:</label></td>
+                                <td><input type="password" id="pAdmin" name="pAdmin" required></td>
+                            </tr>
+                            <tr> 
+                                <td colspan="2"><center><input type="submit" class="btn" value="Add"></center></td>
+                            </tr>
+                        </table>
+                    </form>
+                </center>
+            </div>
             <div class="footer"></div>
 	</div>
     </body>

@@ -27,7 +27,7 @@
                 <input type="button" class="btn" value="Hard Disk" name="hdisk" onclick="location.href='HDiskPage.jsp'"/>
                 <input type="button" class="btn" value="Power Supply" name="powersupply" onclick="location.href='PowerSupplyPage.jsp'"/>
                 <input type="button" class="btn" value="Case" name="case" onclick="location.href='CasePage.jsp'"/>
-                <input type="button" class="btn" value="Constraints" name="constraints" onclick="location.href='ConstraintsPage.jsp'"/>
+                <input type="button" class="btn" value="Admin Settings" name="constraints" onclick="location.href='ConstraintsPage.jsp'"/>
             </div>
             <div class="content">
                 <p>Component Table:</p>
