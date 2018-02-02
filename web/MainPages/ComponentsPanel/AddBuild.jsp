@@ -6,6 +6,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     /*Inserimento dei dati nella purchase*/
+    /*Tramite Session*/
     ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
     String mbcod = (String) request.getSession().getAttribute("mbCod");
     String cpucod = (String) request.getSession().getAttribute("cpuCod");
@@ -14,6 +15,16 @@
     String hdcod = (String) request.getSession().getAttribute("hdCod");
     String pscod = (String) request.getSession().getAttribute("psCod");
     String casecod = (String) request.getSession().getAttribute("caseCod");
+    /*Tramite cookie*/
+    mbcod = new CookiesHandler().getCookie("MBCOD", request);
+    cpucod = new CookiesHandler().getCookie("CPUCOD", request);
+    ramcod = new CookiesHandler().getCookie("RAMCOD", request);
+    gccod = new CookiesHandler().getCookie("GCCOD", request);
+    hdcod = new CookiesHandler().getCookie("HDCOD", request);
+    pscod = new CookiesHandler().getCookie("PSCOD", request);
+    casecod = new CookiesHandler().getCookie("CASECOD", request);
+    
+    
     //Connessioni al db
     Connection conn;
     Statement mystmt;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package JSPElements;
 
 import DatabaseElements.DBConnection;
@@ -89,11 +84,11 @@ public class UserConfigCreator extends DBConnection {
         
         try{
             UserConfigCreator ucf = new UserConfigCreator();
-                System.out.println(ucf.createTable("qwerty"));
+                System.out.println(ucf.createTable("ILKROCCIA"));
         }
         catch(SQLException sql)
         {
-            
+            System.out.println(sql.getMessage());
         }
 
     }

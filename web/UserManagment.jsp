@@ -32,21 +32,14 @@
             </div>
             <div class="content">
                 <center><h1><p>User <%=session.getAttribute("userid")%> - Buildings</p></h1></center>
-                
-
-                
                 <%
-                    
-                   String user = (String) session.getAttribute("userid"); 
-                out.print(new UserConfigCreator().createTable(user));
-                
-                    
-                    %>
-                
+                    String user = (String) session.getAttribute("userid"); 
+                    out.print(new UserConfigCreator().createTable(user));
+                %>
             </div>
             <div class="footer">
-                <input type="button" value="Admin_Mode" name="Admin_Mode" onclick="location.href='../../indexadmin.jsp'"/>
-                <input type="button" value="Restart" name="RestartConfig" onclick="location.href='../../index.html'"/>
+                <input type="button" value="Admin_Mode" name="Admin_Mode" onclick="location.href='indexadmin.jsp'"/>
+                <input type="button" value="Restart" name="RestartConfig" onclick="location.href='index.html'"/>
             </div>
         </div>
     </body>

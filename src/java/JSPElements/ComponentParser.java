@@ -23,7 +23,7 @@ public class ComponentParser extends DBConnection {
                 output = res.getString(2) + "-CC-" + res.getString(3);
             }
            
-        this.closeall();   
+//        this.closeall();   
         return output;
     }                                                                                                                                                                                   
     
