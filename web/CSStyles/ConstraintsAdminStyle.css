@@ -35,13 +35,13 @@ table.tableSection tr:hover {background-color: #D9853B}
 
 .grid {
 display: grid;
-grid-template-columns: 75% 25% ;
+grid-template-columns: 50% 50% ;
 grid-template-rows: auto;
 grid-template-areas:
     ". ."
     "header header"
     "navbar navbar"
-    "content content"
+    "content insidebar"
     "footer footer";
 }
 .header {
@@ -104,4 +104,9 @@ p{
 
 input[text]{
     width: 20px;
+}
+
+label {
+    color: #74AFAD;
+    font-weight: bold;
 }
