@@ -33,6 +33,23 @@ public class DBUserHandler extends DBConnection {
         return st;
     }
     
+    public Boolean addAdmin(String uAdmin, String pAdmin) throws SQLException
+    {
+        Boolean st = false;
+        if(checkUser(uAdmin) == false)
+        {
+            stmt.executeUpdate("insert into adminlogin (USERNAME, PASS) values ('" + uAdmin + "','" + pAdmin + "')");
+            System.out.println("Amministratore " + uAdmin + " creato");
+            st = true;
+        }
+        else
+        {
+            System.err.println("Amministratore " + uAdmin + " già esistente");
+        }
+        
+        return st;
+    }
+    
     public Boolean checkUser(String name)
     {
         Boolean st = false;
