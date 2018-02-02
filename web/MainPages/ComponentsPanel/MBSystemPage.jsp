@@ -61,13 +61,13 @@
             <div class="content">
                 <!-- Progressbar -->
                 <ul id="progressbar">
-                    <li id="active1"><img src="../../CSStyles/IconComponents/Processor-64.png"> Motherboard</li>
-                    <li><img class="noactive" src="../../CSStyles/IconComponents/vector_373_08-64.png">Cpu</li>
-                    <li><img class="noactive" src="../../CSStyles/IconComponents/ram-64.png">Ram</li>
-                    <li><img class="noactive" src="../../CSStyles/IconComponents/graphic_card-64.png">Graphic Card</li>
-                    <li><img class="noactive" src="../../CSStyles/IconComponents/hard-disk-64.png">Hard Disk</li>
-                    <li><img class="noactive" src="../../CSStyles/IconComponents/plug-64.png">Power Supply</li>
-                    <li><img class="noactive" src="../../CSStyles/IconComponents/vector_373_24-64.png">Case</li>
+                    <li id="active1"><img src="../../CSStyles/IconComponents/MotherboardIcon.png"></li>
+                    <li><img class="noactive" src="../../CSStyles/IconComponents/CPUIcon.png"></li>
+                    <li><img class="noactive" src="../../CSStyles/IconComponents/RamIcon.png"></li>
+                    <li><img class="noactive" src="../../CSStyles/IconComponents/GraphicCardIcon.png"></li>
+                    <li><img class="noactive" src="../../CSStyles/IconComponents/HardDiskIcon.png"></li>
+                    <li><img class="noactive" src="../../CSStyles/IconComponents/PowerSupplyIcon.png"></li>
+                    <li><img class="noactive" src="../../CSStyles/IconComponents/CaseIcon.png"></li>
                 </ul>
                 <!-- Loading Motherboard components in a table-->
                 <%

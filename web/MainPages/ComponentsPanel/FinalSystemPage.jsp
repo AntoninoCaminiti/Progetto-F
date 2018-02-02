@@ -5,7 +5,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
-        String mbcod = null;
+    String mbcod = null;
     String mbField = null;
     if(request.getSession().getAttribute("mbCod")!=null)
     {
@@ -172,8 +172,8 @@
                     <tr><label>Graphic Card:</label><input type="text" id="gcField" value="<%if(gcField!=null) out.print(gcField.replace("-CC-", " "));%>" disabled="disabled"></tr><br>
                     <tr><label>Hard Disk:</label><input type="text" id="hdField" value="<%if(hdField!=null) out.print(hdField.replace("-CC-", " "));%>" disabled="disabled"></tr><br>
                     <tr><label>Power Supply:</label><input type="text" id="psField" value="<%if(psField!=null) out.print(psField.replace("-CC-", " "));%>" disabled="disabled"></tr><br>
-                    <tr><label>Case:</label><input type="text" id="caseField" value="<%if(caseField!=null) out.print(caseField.replace("-CC-", " "));%>" disabled="disabled"></tr><br><hr>
-                    <tr><label>Price:</label><input type="text" id="priceField" value="<% if(price!=null) out.print(price); %>" disabled="disabled"><br></tr>
+                    <tr><label>Case:</label><input type="text" id="caseField" value="<%if(caseField!=null) out.print(caseField.replace("-CC-", " "));%>" disabled="disabled"></tr><br>
+                    <tr><label>Price:</label><input type="text" id="priceField" value="<% if(price!=null) out.print(price); %>" disabled="disabled"><br></tr><hr>
                 </table>
                 <form action="AddBuild.jsp" method="post"><button class="btn"><span>Save it!</span><br></button></form>
                 <a href="javascript:history.go(-1)" onMouseOver="document.referrer; return true;"><input type="button" value="Previous"></a>
