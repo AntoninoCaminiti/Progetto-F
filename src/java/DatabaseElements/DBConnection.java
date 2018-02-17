@@ -32,8 +32,8 @@ public class DBConnection
             //conn = DriverManager.getConnection("jdbc:sqlite:sqlite.db");
             //togliere commenti per MYSQL
             Class.forName("com.mysql.jdbc.Driver");
-            //conn = DriverManager.getConnection("jdbc:mysql://den1.mysql2.gear.host:3306/progettof", "progettof", "Antonino-00");
-            conn = DriverManager.getConnection("jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11221675", "sql11221675","NtSjRvzsWD");
+            conn = DriverManager.getConnection("jdbc:mysql://den1.mysql2.gear.host:3306/progettof", "progettof", "Antonino-00");
+            //conn = DriverManager.getConnection("jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11221675", "sql11221675","NtSjRvzsWD");
             
             mystmt = conn.createStatement();
             }
