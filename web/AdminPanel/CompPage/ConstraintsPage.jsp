@@ -49,9 +49,9 @@
             <div class="header"><h1> Admin Side - Choose Type of Component </h1>
             <%//Success of login
             if ((session.getAttribute("useridadm") == null) || (session.getAttribute("useridadm") == "")) {
-                response.sendRedirect("../../indexadmin.jsp"); 
+                response.sendRedirect("./AdminPanel/Login.html"); 
             } else { %>
-                Welcome <%=session.getAttribute("useridadm")%> <a href='../../logout.jsp'>Log out</a>
+                Welcome <%=session.getAttribute("useridadm")%> <a href='./../Logout.jsp'>Log out</a>
             <%}%>
             </div>
             <div class="navbar">

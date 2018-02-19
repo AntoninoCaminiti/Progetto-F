@@ -169,7 +169,7 @@
                 <!--input  type="button" value="Next" name="next" onclick="location.href=urlForward"/-->
             </div>
             <div class="footer">
-                    <input type="button" value="Admin_Mode" name="Admin_Mode" onclick="location.href='../../indexadmin.jsp'"/>
+                    <input type="button" value="Admin_Mode" name="Admin_Mode" onclick="location.href='../../AdminPanel/Login.html'"/>
                     <input type="button" value="Restart" name="RestartConfig" onclick="location.href='../../index.html'"/>
             </div>
         </div>

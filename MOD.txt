@@ -1,0 +1,18 @@
+indexadmin.jsp -> Login.jsp
+
+
+CustomerLogin.jsp -> CustomerLogin.html
+
+login.jsp -> CustomerLogin.jsp
+
+loginadmin.jsp -> LoginAdmin.jsp
+
+AdminAccess.jsp -> ErrorLogin.html
+
+reg.jsp -> RegistrationForm.html
+registration.jsp -> Registration.jsp
+
+success.jsp -> LoginSuccessful.jsp
+
+
+

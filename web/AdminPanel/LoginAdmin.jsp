@@ -13,11 +13,11 @@
     rs = st.executeQuery("select * from ADMINLOGIN where USERNAME='" + useridadm + "' and PASS='" + pwdadm + "'");
     if (rs.next()) {
         
-        response.sendRedirect("AdminPanel/CompPage/MotherboardPage.jsp");
+        response.sendRedirect("./CompPage/MotherboardPage.jsp");
         session.setAttribute("useridadm", useridadm);
-        out.println("welcome " + useridadm);
-        out.println("<a href='logout.jsp'>Log out</a>");
+        out.println("Welcome " + useridadm);
     } else {
-        out.println("Invalid password <a href='indexadmin.jsp'>try again</a>");
+        response.sendRedirect("ErrorLogin.html");
+        out.println("Invalid password <a href='Login.html'>try again</a>");
     }
 %>
