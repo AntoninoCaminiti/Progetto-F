@@ -75,7 +75,14 @@
                 </ul>
                 <!-- Loading Motherboard components in a table-->
                 <%
+                    
+                    try{
                     out.println(new HTMLTableCreator().createMotherboard(false));
+                    }
+                    catch(NullPointerException npe)
+                    {
+                        response.sendRedirect("../../ErrorPages/index.html");
+                    }
                 %>
                 <!--Sending data to next page-->
                 <script>

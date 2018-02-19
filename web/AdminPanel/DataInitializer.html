@@ -8,13 +8,23 @@
         
         <form action="DataInitializer.jsp" method="POST">
             
-            <input type="text" id="host" name="host"/>
-            <input type="text" id="database" name="database"/>
-            <input type="text" id="username" name="username"/>
-            <input type="password" id="password" name="password"/>
-            <input type="submit" value="Connetti"/>
+            
+            Host: <p><input type="text" id="host" name="host"/><p>
+            Database name: <p><input type="text" id="database" name="database"/><p>
+            Username: <p><input type="text" id="username" name="username"/><p>
+            Password: <p><input type="password" id="password" name="password"/><p>
+            <input type="submit" onclick="check()" value="Connetti"/>
             
         </form>
+        
+        <script>
+            
+            function check(){
+                if(document.getElementById("host").value == "" || document.getElementById("database").value == "" || document.getElementById("username").value == "" || document.getElementById("password").value == "")
+                    alert("Complete form providing all data");
+            }
+            
+            </script>
         
     </body>
 </html>

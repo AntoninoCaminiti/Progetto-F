@@ -8,7 +8,7 @@
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 
-    if(host!=null && database!=null && username!=null && password!=null)
+    if(!host.equals("") && !database.equals("") && !username.equals("") && !password.equals(""))
     {
         new DatabaseInit().setConn(host, database, username, password);
         response.sendRedirect("../index.html");
