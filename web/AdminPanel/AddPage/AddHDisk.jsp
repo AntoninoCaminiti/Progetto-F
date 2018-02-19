@@ -1,12 +1,11 @@
 <%@ page import="Components.HDriveLoader"%>
 <%@ page import="DatabaseElements.*"%>
+<%@ page import="Exceptions.*"%>
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html; charset=ISO-8859-5" %>
 
-<head>
-    <meta http-equiv="refresh" content="0; url=../CompPage/HDiskPage.jsp" />
-</head>
+
 <%
     //legge i valori ricevuti dal form HTML
     String Stringa1 = new String (request.getParameter("brand"));
@@ -27,6 +26,13 @@
         DBConnection db = new DBConnection();
         db.Connect();
         db.filldbHDrive(Stringa1, Stringa2, Stringa3, Stringa4, Stringa5, Int1, Int2, Int3, db1);
+        out.print("<meta http-equiv=\"refresh\" content=\"0; url=../CompPage/HDiskPage.jsp\" />");
+    }
+    catch(ErrorInsertComponent eic)
+    {
+        out.println("<font size =\"100\" color=\"red\">" + eic.getMessage() + "</font>");
+        out.print("<meta http-equiv=\"refresh\" content=\"3; url=../CompPage/HDiskPage.jsp\" />");
+        
     }
     catch(SQLException ex){
             out.println("Connessione fallita.");

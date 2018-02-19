@@ -1,12 +1,11 @@
 <%@ page import="Components.RAMLoader"%>
 <%@ page import="DatabaseElements.*"%>
+<%@ page import="Exceptions.*"%>
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html; charset=ISO-8859-5" %>
 
-<head>
-    <meta http-equiv="refresh" content="0; url=../CompPage/RamPage.jsp" />
-</head>
+
 <%
     //legge i valori ricevuti dal form HTML
     String Stringa1 = new String (request.getParameter("brand"));
@@ -28,6 +27,13 @@
         RAMLoader rm = new RAMLoader();
         db.Connect();
         db.filldbRAM(Stringa1, Stringa2, Stringa3, Stringa4, Int1, Int2, Int3, Int4, db1);
+        out.print("<meta http-equiv=\"refresh\" content=\"0; url=../CompPage/RamPage.jsp\" />");
+    }
+    catch(ErrorInsertComponent eic)
+    {
+        out.println("<font size =\"100\" color=\"red\">" + eic.getMessage() + "</font>");
+        out.print("<meta http-equiv=\"refresh\" content=\"3; url=../CompPage/RamPage.jsp\" />");
+        
     }
     catch(SQLException ex){
             out.println("Connessione fallita.");

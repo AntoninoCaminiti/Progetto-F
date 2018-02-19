@@ -1,12 +1,11 @@
 <%@ page import="Components.*"%>
 <%@ page import="DatabaseElements.*"%>
+<%@ page import="Exceptions.*"%>
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html; charset=ISO-8859-5" %>
 
-<head>
-    <meta http-equiv="refresh" content="0; url=../CompPage/CasePage.jsp" />
-</head>
+
 <%
     //legge i valori ricevuti dal form HTML
     String Stringa1 = new String (request.getParameter("brand"));
@@ -24,6 +23,14 @@
         CaseLoader c = new CaseLoader();
         db.Connect();
         db.filldbCase(Stringa1, Stringa2, Stringa3, Stringa4, Stringa5, db1, db2);
+        out.print("<meta http-equiv=\"refresh\" content=\"0; url=../CompPage/CasePage.jsp\" />");
+        
+    }
+    catch(ErrorInsertComponent eic)
+    {
+        out.println("<font size =\"100\" color=\"red\">" + eic.getMessage() + "</font>");
+        out.print("<meta http-equiv=\"refresh\" content=\"3; url=../CompPage/CasePage.jsp\" />");
+        
     }
     catch(SQLException ex){
         out.println("Connessione fallita.");
