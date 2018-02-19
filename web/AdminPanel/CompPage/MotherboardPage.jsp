@@ -16,7 +16,7 @@
             if ((session.getAttribute("useridadm") == null) || (session.getAttribute("useridadm") == "")) {
                 response.sendRedirect("../../AdminPanel/Login.html"); 
             } else { %>
-                Welcome <%=session.getAttribute("useridadm")%> <a href='../../logout.jsp'>Log out</a>
+                Welcome <%=session.getAttribute("useridadm")%> <a href='./../Logout.jsp'>Log out</a>
             <%}%>
             </div>
             <div class="navbar">

@@ -8,8 +8,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="CSStyles/UserManagmentStyle.css">
-        <link rel="icon" href="CSStyles/projectIcon.png" type="image/png"/>
+        <link rel="stylesheet" type="text/css" href="../CSStyles/UserManagmentStyle.css">
+        <link rel="icon" href="../CSStyles/projectIcon.png" type="image/png"/>
         <title>VIRTUAL - User Managment</title>
     </head>
     <body>
@@ -21,13 +21,13 @@
             %>
                 <span style="display: inline;">
                 You are not logged in
-                <input type="button" value="SIGN-IN" name="sign-in" onclick="location.href='CustomerLogin.jsp'"/>
-                <input type="button" value="SIGN-UP" name="sign-up" onclick="location.href='reg.jsp'"/>
+                <input type="button" value="SIGN-IN" name="sign-in" onclick="location.href='Login.html'"/>
+                <input type="button" value="SIGN-UP" name="sign-up" onclick="location.href='RegistrationForm.html'"/>
                 </span>
             <%} 
             else {%>
                 Welcome <%=session.getAttribute("userid")%>
-                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='logout.jsp'"/>
+                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='Logout.jsp'"/>
                 <%}%>
             </div>
             <div class="content">
@@ -39,7 +39,7 @@
             </div>
             <div class="footer">
                 <input type="button" value="Admin_Mode" name="Admin_Mode" onclick="location.href='../../AdminPanel/Login.html'"/>
-                <input type="button" value="Restart" name="RestartConfig" onclick="location.href='index.html'"/>
+                <input type="button" value="Restart" name="RestartConfig" onclick="location.href='../index.html'"/>
             </div>
         </div>
     </body>

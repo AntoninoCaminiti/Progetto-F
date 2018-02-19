@@ -61,7 +61,7 @@
         int ress2;
         ress2 = mystmt.executeUpdate("insert into SAVES (SAVECOD, PURCOD) values('"+ CusCod +"', '"+ actualCod +"') ");   
         %>
-        <script>window.location.replace("../../ConfigurationSaved.jsp");</script>
+        <script>window.location.replace("../../Users/ConfigurationSaved.jsp");</script>
         <%
     }
     catch(SQLException ex){

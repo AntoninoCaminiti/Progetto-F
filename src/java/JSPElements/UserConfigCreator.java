@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Aventador LP700-4
+ * @author EugeHysa
  */
 public class UserConfigCreator extends DBConnection {
     Connection conn = null;
@@ -35,7 +35,7 @@ public class UserConfigCreator extends DBConnection {
                         
                         /**/
                         //String userid = (String) request.getSession().getAttribute("userid");
-                        res = mystmt.executeQuery("select save.MCOD, save.CPUCOD, save.RCOD, save.GCOD, save.HCOD, save.PCOD, save.CSCOD from customerlogin join (select pur.MCOD, pur.CPUCOD, pur.RCOD, pur.GCOD, pur.HCOD, pur.PCOD, pur.CSCOD, sa.SAVECOD from SAVES as sa join PURCHASES as pur where sa.PURCOD = pur.COD) as save where save.SAVECOD = customerlogin.USERSAVE and USERNAME = '"+ userid +"' ");
+                        res = mystmt.executeQuery("select save.MCOD, save.CPUCOD, save.RCOD, save.GCOD, save.HCOD, save.PCOD, save.CSCOD from CustomerLogin join (select pur.MCOD, pur.CPUCOD, pur.RCOD, pur.GCOD, pur.HCOD, pur.PCOD, pur.CSCOD, sa.SAVECOD from SAVES as sa join PURCHASES as pur where sa.PURCOD = pur.COD) as save where save.SAVECOD = CustomerLogin.USERSAVE and USERNAME = '"+ userid +"' ");
                         /*Tabella intestazione*/
                         sb.append("<table id=\"tableBuild\" class=\"tableSection\">");
                         sb.append("<thead>");

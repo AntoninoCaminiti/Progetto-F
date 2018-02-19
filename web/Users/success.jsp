@@ -4,11 +4,11 @@ session_start();
 if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
 %>
 You are not logged in
-<a href="CustomerLogin.jsp">Please Login</a>
+<a href="Login.html">Please Login</a>
 <%} else {
 %>
 Welcome <%=session.getAttribute("userid")%>
-<a href='logout.jsp'>Log out</a>
+<a href='Logout.jsp'>Log out</a>
 <%
 }
 %>

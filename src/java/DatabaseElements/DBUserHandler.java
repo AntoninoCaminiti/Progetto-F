@@ -21,7 +21,7 @@ public class DBUserHandler extends DBConnection {
         Boolean st = false;
         if(checkUser(uname) == false)
         {
-            stmt.executeUpdate("insert into customerlogin (USERNAME, PASS, EMAIL, ADDRESS) values ('" + uname + "','" + pwd + "','" + email + "','" + addr +"')");
+            stmt.executeUpdate("insert into CustomerLogin (USERNAME, PASS, EMAIL, ADDRESS) values ('" + uname + "','" + pwd + "','" + email + "','" + addr +"')");
             System.out.println("Utente " + uname + " creato");
             st = true;
         }
@@ -38,7 +38,7 @@ public class DBUserHandler extends DBConnection {
         Boolean st = false;
         if(checkUser(uAdmin) == false)
         {
-            stmt.executeUpdate("insert into adminlogin (USERNAME, PASS) values ('" + uAdmin + "','" + pAdmin + "')");
+            stmt.executeUpdate("insert into ADMINLOGIN (USERNAME, PASS) values ('" + uAdmin + "','" + pAdmin + "')");
             System.out.println("Amministratore " + uAdmin + " creato");
             st = true;
         }

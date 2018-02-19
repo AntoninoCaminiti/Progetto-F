@@ -13,12 +13,12 @@
     if(db.addUser(user, pwd, email, addr)==true)
     {
     session.setAttribute("userid", user);
-    response.sendRedirect("./MainPages/ComponentsPanel/MBSystemPage.jsp");    
+    response.sendRedirect("./../MainPages/ComponentsPanel/MBSystemPage.jsp");    
     }
     else
     {
     
-    response.sendRedirect("ExistingUserError.jsp");   
+    response.sendRedirect("../ErrorPages/ExistingUserError.jsp");   
     }
     
         

@@ -74,12 +74,12 @@
             if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
             %>
                 You are not logged in
-                <input type="button" value="SIGN-IN" name="sign-in" onclick="location.href='../../CustomerLogin.jsp'"/>
-                <input type="button" value="SIGN-UP" name="sign-up" onclick="location.href='../../reg.jsp'"/>
+                <input type="button" value="SIGN-IN" name="sign-in" onclick="location.href='../../Users/Login.html'"/>
+                <input type="button" value="SIGN-UP" name="sign-up" onclick="location.href='../../Users/RegistrationForm.html'"/>
             <%} 
             else {%>
-                Welcome <a href="./../../UserManagment.jsp" > <%=session.getAttribute("userid")%> </a>
-                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../logout.jsp'"/>
+                Welcome <a href="./../../Users/UserManagement.jsp" > <%=session.getAttribute("userid")%> </a>
+                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../User/Logout.jsp'"/>
                 <%}%>
             </div>
             <div class="sidebar">

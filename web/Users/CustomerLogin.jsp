@@ -1,27 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login to VIRTUAL</title>
-        <link rel="stylesheet" type="text/css" href="./CSStyles/LoginStyle.css">
-        <link rel="icon" href="./../../CSStyles/projectIcon.png" type="image/png"/>
-    </head>
-    <body>
-        <div class="login-page">
-            <div class="form">
-            <form class="login-form" method="post" action="login.jsp">
-                <h1>Login</h1>
-                <input type="hidden" name="uref" id="uref"/>
-                <input type="text" name="uname" id="uname" placeholder="Username..."/>
-                <input type="password" name="pass" id="pass" placeholder="Password..."/>
-                <button>Sign In</button>
-                <p class="message">Not registered?! <a href="reg.jsp">Create an account!</a></p>
-                <p class="message"><a href="index.html">Go back home! <img src="./CSStyles/home.png" alt="Go back home!" width="16" height="16"></a></p>
-            </form>
-          </div>
-        </div>
-    </body>
-</html>
-<script>
-    document.getElementById("uref").value = document.referrer;
-</script>
+<%@ page import ="java.sql.*" %>
+<%@ page language="java" %>
+<%@ page import="DatabaseElements.*" %>
+
+<%
+    String userid = request.getParameter("uname");    
+    String pwd = request.getParameter("pass");
+    
+    
+    Statement st = new DBConnection().Connect();
+    ResultSet rs;
+    rs = st.executeQuery("select * from CustomerLogin where USERNAME='" + userid + "' and PASS='" + pwd + "'");
+    if (rs.next()) {
+        session.setAttribute("userid", userid);
+        
+       response.sendRedirect(request.getParameter("uref"));
+    } else {
+        out.println("Invalid password <a href='Login.html'>try again</a>");
+    }
+%>
