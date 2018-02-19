@@ -1,7 +1,7 @@
 package JSPElements;
 
 import DatabaseElements.DBConnection;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

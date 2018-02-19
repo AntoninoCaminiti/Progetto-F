@@ -9,23 +9,26 @@ import Components.RAMLoader;
 import java.sql.*;
 
 public class DBConnection 
-{     
-    private String user;
-    private String pass;
+{
     
-    Connection conn;
-    Statement mystmt;
-    ResultSet res;
-
+    protected Connection conn;
+    protected Statement mystmt;
+    protected ResultSet res;
+    private static DatabaseInit data;
+    
     public DBConnection()
     {
         conn = null;
         mystmt = null;
         res = null;
+        data = new DatabaseInit();
     } 
+    
+    
     
     public Statement Connect() throws SQLException
     {
+        
         try{
             //commentare per bloccare sqlite
             //Class.forName("org.sqlite.JDBC");
@@ -34,7 +37,7 @@ public class DBConnection
             Class.forName("com.mysql.jdbc.Driver");
             //conn = DriverManager.getConnection("jdbc:mysql://den1.mysql2.gear.host:3306/progettof", "progettof", "Antonino-00");
             //conn = DriverManager.getConnection("jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11221675", "sql11221675","NtSjRvzsWD");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Components", "root", "untothedead94");
+            conn = DriverManager.getConnection("jdbc:mysql://"+ data.getHost() + ":3306/"+ data.getDatabase(), data.getUsername(), data.getPassword());
             mystmt = conn.createStatement();
             }
         catch(ClassNotFoundException ex)
@@ -47,18 +50,7 @@ public class DBConnection
         }
             return mystmt;
     }
-    //pass the username and password from LoginForm
-    public Boolean setUP(String user, String pass)
-    {
-        if(!user.equals("") && !pass.equals(""))
-        {
-            this.user = user;
-            this.pass = pass;
-            return true;
-        }
-        else
-            return false;
-    }
+
     //close all connection from MySQL database
     public void closeall() throws SQLException
     {
@@ -325,10 +317,11 @@ public class DBConnection
         DBConnection db = new DBConnection();
         RAMLoader c = new RAMLoader();
         try{
+            
         db.Connect();
         db.loadRAM(c);
         
-        db.removeShrt("cpu", "2016");
+        //db.removeShrt("cpu", "2016");
         c.printAll();
         db.closeall();
         

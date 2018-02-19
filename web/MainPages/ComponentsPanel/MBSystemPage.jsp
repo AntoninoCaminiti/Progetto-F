@@ -2,7 +2,11 @@
 <%@ page import="Components.*"%>
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="DatabaseElements.DatabaseInit" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="beanzz" scope="session" class="DatabaseElements.DatabaseInit"/>
+
+
 <%
     ConfigurationSave confSave = new ConfigurationSave();
     session.setAttribute("confSave", confSave);
