@@ -48,11 +48,4 @@ public class DatabaseInit {
         return password;
     }
     
-    public static void main(String[] args) {
-        DatabaseInit id = new DatabaseInit();
-        
-        System.out.println(id.getHost());
-    }
-    
-    
 }

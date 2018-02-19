@@ -6,6 +6,7 @@ import Components.HDriveLoader;
 import Components.MBLoader;
 import Components.PSLoader;
 import Components.RAMLoader;
+import Exceptions.ErrorInsertComponent;
 import java.sql.*;
 
 public class DBConnection 
@@ -84,21 +85,14 @@ public class DBConnection
         {}
     }
 
-    public void filldbCPU(String brand, String model, String socket, Double frequency, int core, int tdp, Double price)
+    public void filldbCPU(String brand, String model, String socket, Double frequency, int core, int tdp, Double price) throws SQLException, ErrorInsertComponent
     {
-        try
-        {
+            checkExistingComponent(brand, model, "CPU");
             int ress;
             ress = mystmt.executeUpdate("insert into CPU (BRAND, MODEL, CPUSOCKET, FREQUENCY, CORES, TDP, PRICE) values('"+brand+"', '"+model+"', '"+socket+"', "+frequency+", "+core+", "+tdp+", "+price+")");
-            if(ress == 0) throw new SQLException();
-            
-            System.out.println(ress + " query affected");
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Error in insert query.");
-            System.exit(0);
-        }
+           // if(ress == 0) throw new SQLException();
+           //System.out.println(ress + " query affected");
+        
     }
     
     
@@ -116,21 +110,15 @@ public class DBConnection
         {}
     }
 
-    public void filldbCase(String brand, String model, String type, String color, String MOTHERBOARD_compatibili, Double max_hdrive_length, Double price)
+    public void filldbCase(String brand, String model, String type, String color, String MOTHERBOARD_compatibili, Double max_hdrive_length, Double price) throws SQLException, ErrorInsertComponent
     {
-        try
-        {
+        checkExistingComponent(brand, model, "PCCASE");
             int ress;
             ress = mystmt.executeUpdate("insert into PCCASE (BRAND, MODEL, CASETYPE, COLOR, COMPATIBLE_MOTHERBOARDS, MAX_HDRIVE_LENGTH, PRICE) values('"+brand+"', '"+model+"', '"+type+"', '"+color+"', '"+MOTHERBOARD_compatibili+"', "+max_hdrive_length+", "+price+")");
-            if(ress == 0) throw new SQLException();
+            //if(ress == 0) throw new SQLException();
             
-            System.out.println(ress + " query affected");
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Error in insert query.");
-            System.exit(0);
-        }
+            //System.out.println(ress + " query affected");
+        
     }
 
  
@@ -148,39 +136,25 @@ public class DBConnection
         {} 
     }
     
-    public void filldbMB(String brand, String model, String socket, String formfactor , String chipset, int ramslot, String ramtype, int maxram, int tdp, Double price)
+    public void filldbMB(String brand, String model, String socket, String formfactor , String chipset, int ramslot, String ramtype, int maxram, int tdp, Double price) throws SQLException, ErrorInsertComponent
     {
-        try
-        {
+            checkExistingComponent(brand, model, "MOTHERBOARD");
             int ress;            
             ress = mystmt.executeUpdate("insert into MOTHERBOARD (BRAND, MODEL, SOCKET_CPU, FORMFACTOR, CHIPSET, RAM_SLOTS, RAM_TYPE, RAM_MAX_GB, TDP, PRICE) values('"+brand+"', '"+model+"','"+socket+"', '"+formfactor+"', '"+chipset+"',  "+ramslot+", '"+ ramtype + "', "+ maxram+", "+tdp+", "+price+")");
-            if(ress == 0) throw new SQLException();
-            
-            System.out.println(ress + " query affected");
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Error in insert query.");
-            System.exit(0);
-        }
+            //if(ress == 0) throw new SQLException();
+            //System.out.println(ress + " query affected");
+        
     }
     
     
-    public void filldbPS(String brand, String model, String series, String form, String efficiency ,int tdp, String modular, Double price)
+    public void filldbPS(String brand, String model, String series, String form, String efficiency ,int tdp, String modular, Double price) throws SQLException, ErrorInsertComponent
     {
-        try
-        {
+            checkExistingComponent(brand, model, "POWER_SUPPLY");
             int ress;
             ress = mystmt.executeUpdate("insert into POWER_SUPPLY (BRAND, MODEL, SERIES, FORM, EFFICIENCY, TDP, MODULAR, PRICE) values('"+brand+"', '"+model+"', '"+series+"', '"+form+"', '"+efficiency+"', "+tdp+", '"+modular+"', "+price+")");
-            if(ress == 0) throw new SQLException();
-            
-            System.out.println(ress + " query affected");
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Error in insert query.");
-            System.exit(0);
-        }
+           // if(ress == 0) throw new SQLException();
+           // System.out.println(ress + " query affected");
+        
     }
        
     public void loadPS(PSLoader ps)
@@ -213,21 +187,14 @@ public class DBConnection
         {}
     }
 
-    public void filldbRAM(String brand, String model, String type, String speed, int tdp, int nom, int som, int size, Double price)
+    public void filldbRAM(String brand, String model, String type, String speed, int tdp, int nom, int som, int size, Double price) throws SQLException, ErrorInsertComponent
     {
-        try
-        {
+            checkExistingComponent(brand, model, "RAM");
             int ress;
             ress = mystmt.executeUpdate("insert into RAM (BRAND, MODEL, RAM_TYPE, SPEED, TDP, NUMBER_OF_MODULES, SIZE_OF_MODULES, SIZE, PRICE) values('"+brand+"', '"+model+"', '"+type+"', '"+speed+"', "+tdp+", "+nom+", "+som+ ","+ size +", "+price+")");
-            if(ress == 0) throw new SQLException();
-            
-            System.out.println(ress + " query affected");
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Error in insert query.");
-            System.exit(0);
-        }
+            //if(ress == 0) throw new SQLException();
+            //System.out.println(ress + " query affected");
+        
     }
 
     
@@ -245,21 +212,14 @@ public class DBConnection
         {} 
     }
     
-    public void filldbGCard(String brand, String model, String serie, String chipset, int mem, Double clock, int tdp, int length, Double price)
+    public void filldbGCard(String brand, String model, String serie, String chipset, int mem, Double clock, int tdp, int length, Double price) throws SQLException, ErrorInsertComponent
     {
-        try
-        {
+            checkExistingComponent(brand, model, "GRAPHICS_CARD");
             int ress;
             ress = mystmt.executeUpdate("insert into GRAPHICS_CARD (brand, model, series, chipset, memory, core_clock, tdp, length,price) values('"+brand+"', '"+model+"', '"+serie+"', '"+chipset+"', "+mem+", "+ clock +", "+tdp+", "+length+", "+price+")");
-            if(ress == 0) throw new SQLException();
-            
-            System.out.println(ress + " query affected");
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Error in insert query.");
-            System.exit(0);
-        }
+            // if(ress == 0) throw new SQLException();
+            // System.out.println(ress + " query affected");
+        
     }
       
 
@@ -277,21 +237,14 @@ public class DBConnection
         {}
     }
     
-    public void filldbHDrive(String brand, String model, String serie, String form, String type, int size, int tdp, int cache, Double price)
+    public void filldbHDrive(String brand, String model, String serie, String form, String type, int size, int tdp, int cache, Double price) throws SQLException, ErrorInsertComponent
     {
-        try
-        {
+            checkExistingComponent(brand, model, "HDRIVE");
             int ress;
             ress = mystmt.executeUpdate("insert into HDRIVE (BRAND,MODEL,SERIE,FORM,TYPE,SIZE,TDP,CACHE,PRICE) values('"+brand+"', '"+model+"', '"+serie+"', '"+form+"', '"+type+"', "+size+","+ tdp + ", " + cache +", "+price+")");
-            if(ress == 0) throw new SQLException();
-            
-            System.out.println(ress + " query affected");
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Error in insert query.");
-            System.exit(0);
-        } 
+           // if(ress == 0) throw new SQLException();
+           // System.out.println(ress + " query affected");
+        
     }
 
         
@@ -312,19 +265,54 @@ public class DBConnection
             System.exit(0);
         }
     }
+    
+    
+    public void checkExistingComponent(String brand, String model, String table) throws ErrorInsertComponent
+    {
+        String BRAND;
+        String MODEL;
+        
+        try{
+            
+            res = mystmt.executeQuery("select BRAND, MODEL from " + table);
+            
+            while(res.next()){
+                BRAND= res.getString(1).trim();
+                MODEL = res.getString(2).trim();
+                
+                
+                
+                if(BRAND.equals(brand) && MODEL.equals(model)) throw new ErrorInsertComponent();
+            }
+        }
+        catch(SQLException eic)
+        {
+            System.out.println(eic.toString());
+        }
+            
+        
+        
+    }
+    
+    
 
     public static void main(String[] args) {
         DBConnection db = new DBConnection();
         RAMLoader c = new RAMLoader();
         try{
-            
+        DatabaseInit db1 = new DatabaseInit();
+        db1.setConn("localhost", "Components", "root", "untothedead94");
         db.Connect();
         db.loadRAM(c);
-        
+        db.checkExistingComponent("AMD", "RYZEN 51500X", "CPU");
         //db.removeShrt("cpu", "2016");
         c.printAll();
         db.closeall();
         
+        }
+        catch(ErrorInsertComponent eic)
+        {
+            System.out.println(eic.getMessage());
         }
         catch(SQLException e)
         {}
