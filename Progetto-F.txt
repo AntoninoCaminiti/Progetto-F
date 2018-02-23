@@ -7,12 +7,15 @@ Interfaccia: James Abbate
 
 
 NOTE:
-Per l'esecuzione del progetto è richiesta una application server (consigliato Glassfish poichè si è lavorato con esso), che una volta configurata basterà eseguire il file index.html dalla directory Web Pages.
+Per l'esecuzione del progetto è richiesta una application server (consigliato Glassfish poichè si è lavorato con esso), che una volta configurata basterà eseguire il file index.html dalla directory Web Pages. Poiche' per la prima esecuzione e' richiesta l'inizializzaione dei dati al database, viene mostrato un avviso che indica di inizializzare i dati richiesti. 
 Il progetto, nella sua versione temporanea, consente l'utilizzo delle funzioni base: configurazione dei componenti PC, il salvataggio della propria configurazione, registrazione nuovo utente, login utente per recupero di eventuali configurazioni salvate, nel caso di utente amministratore si può cancellare, modificare o inserire un componente, possbilità di inserire nuovi utenti admin e decidere quali sono i vincoli di compatibilità.
 Il progetto fa uso di database gratuito online per poter essere eseguibile in comodità, ciò può comportare rallentamenti nel caricamento dati.
 
 
 Modifiche necessarie:
-- possibilità di scelta dei vincoli di compatibilità anche per il cliente
+
 - fix minori di eventuali bug
 - ulteriore refactoring per miglioramento codice
+
+Modifiche opzionali:
+- possibilità di scelta dei vincoli di compatibilità anche per il cliente
