@@ -4,7 +4,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
+    
     String mbcod = null;
     String mbField = null;
     if(request.getSession().getAttribute("mbCod")!=null)
@@ -37,8 +37,8 @@
     
     request.getSession().setAttribute("ramCod", ramcod);
     
-    confSave.setRAMCod(ramcod);
-    session.setAttribute("confSave", confSave);
+
+
     String ramField = null;
     if(request.getSession().getAttribute("ramCod")!=null)
     {
@@ -56,8 +56,8 @@
     
     request.getSession().setAttribute("gcCod", gccod);
     
-    confSave.setGCCod(gccod);
-    session.setAttribute("confSave", confSave);
+
+
     String gcField = null;
     if(request.getSession().getAttribute("gcCod")!=null)
     {
@@ -76,8 +76,8 @@
     
     request.getSession().setAttribute("hdCod", hdcod);
     
-    confSave.setHDCod(hdcod);
-    session.setAttribute("confSave", confSave);
+
+
     String hdField = null;
     if(request.getSession().getAttribute("hdCod")!=null)
     {
@@ -95,8 +95,7 @@
     
     request.getSession().setAttribute("psCod", pscod);
     
-    confSave.setPSCod(pscod);
-    session.setAttribute("confSave", confSave);
+
     String psField = null;
     if(request.getSession().getAttribute("psCod")!=null)
     {
@@ -142,7 +141,7 @@
             <%} 
             else {%>
                 Welcome <a href="./../../Users/UserManagement.jsp" > <%=session.getAttribute("userid")%> </a>
-                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../User/Logout.jsp'"/>
+                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../Users/Logout.jsp'"/>
             <%}%>
         </div>
         <div class="sidebar">
@@ -196,6 +195,7 @@
                         document.getElementById("price").value = document.getElementById("priceField").value;
                         document.getElementById("nextbtn").disabled = false;
                         document.cookie = "CASECOD=" + document.getElementById("caseCod").value;
+                        document.cookie = "PRICE=" + document.getElementById("price").value;
                      };
                 }
             </script>

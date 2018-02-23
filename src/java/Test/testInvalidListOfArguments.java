@@ -1,6 +1,6 @@
 package Test;
 
-import Exceptions.InvalidListOfArguments;
+import Exceptions.InvalidListOfArgumentsException;
 
 /**
  *
@@ -9,9 +9,9 @@ import Exceptions.InvalidListOfArguments;
 public class testInvalidListOfArguments {
     public static void main(String[] args) {
         try{
-            throw new InvalidListOfArguments();
+            throw new InvalidListOfArgumentsException();
         }
-        catch(InvalidListOfArguments il)
+        catch(InvalidListOfArgumentsException il)
         {
             System.err.println(il.toString());
         }

@@ -4,7 +4,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
+    
     String mbcod = null;
     String mbField = null;
     if(request.getSession().getAttribute("mbCod")!=null)
@@ -37,8 +37,7 @@
     
     request.getSession().setAttribute("ramCod", ramcod);
     
-    confSave.setRAMCod(ramcod);
-    session.setAttribute("confSave", confSave);
+
     String ramField = null;
     if(request.getSession().getAttribute("ramCod")!=null)
     {
@@ -56,8 +55,7 @@
     
     request.getSession().setAttribute("gcCod", gccod);
     
-    confSave.setGCCod(gccod);
-    session.setAttribute("confSave", confSave);
+
     String gcField = null;
     if(request.getSession().getAttribute("gcCod")!=null)
     {
@@ -76,8 +74,7 @@
     
     request.getSession().setAttribute("hdCod", hdcod);
     
-    confSave.setHDCod(hdcod);
-    session.setAttribute("confSave", confSave);
+
     String hdField = null;
     if(request.getSession().getAttribute("hdCod")!=null)
     {
@@ -95,8 +92,7 @@
     
     request.getSession().setAttribute("psCod", pscod);
     
-    confSave.setPSCod(pscod);
-    session.setAttribute("confSave", confSave);
+
     String psField = null;
     if(request.getSession().getAttribute("psCod")!=null)
     {
@@ -114,8 +110,7 @@
     
     request.getSession().setAttribute("caseCod", casecod);
     
-    confSave.setPCCod(casecod);
-    session.setAttribute("confSave", confSave);
+
     String caseField = null;
     if(request.getSession().getAttribute("caseCod")!=null)
     {
@@ -130,14 +125,14 @@
     caseField = new ComponentParser().getComponent("PCCASE", casecod).replace("-CC-", " ");
     
     Double price = null;
-    if(request.getParameter("price") != null){
+    /*if(request.getParameter("price") != null){
         price = Double.parseDouble(request.getParameter("price"));
         new Cookie("PRICE", request.getParameter("price"));
-    }
-    if(request.getParameter("price")==null)
-    {
+    }*/
+    /* if(request.getParameter("price")==null)
+    { */
         price = Double.parseDouble(new CookiesHandler().getCookie("PRICE", request));
-    }    
+    //}    
 %>
 <!DOCTYPE html>
 <html>
@@ -159,7 +154,7 @@
                 <%} 
                 else {%>
                     Welcome <a href="./../../Users/UserManagement.jsp" > <%=session.getAttribute("userid")%> </a>
-                    <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../User/Logout.jsp'"/>
+                    <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../Users/Logout.jsp'"/>
                 <%}%>
             </div>
             <div class="content">

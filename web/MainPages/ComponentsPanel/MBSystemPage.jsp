@@ -4,15 +4,11 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="DatabaseElements.DatabaseInit" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="beanzz" scope="session" class="DatabaseElements.DatabaseInit"/>
 
 
 <%
-    ConfigurationSave confSave = new ConfigurationSave();
-    session.setAttribute("confSave", confSave);
-    
     String mbcod = null;
-    Double price = null /*Double.parseDouble(request.getParameter("price"))*/;
+    Double price = null;
     if(request.getSession().getAttribute("mbCod")!=null && request.getSession().getAttribute("price")!=null)
     {
         mbcod = (String) request.getSession().getAttribute("mbCod");
@@ -47,7 +43,7 @@
             <%} 
             else {%>
                 Welcome <a href="./../../Users/UserManagement.jsp" > <%=session.getAttribute("userid")%> </a>
-                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../User/Logout.jsp'"/>
+                <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../Users/Logout.jsp'"/>
                 <%}%>
             </div>
             <div class="sidebar">

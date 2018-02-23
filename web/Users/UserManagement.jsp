@@ -38,8 +38,8 @@
                 %>
             </div>
             <div class="footer">
-                <input type="button" value="Admin_Mode" name="Admin_Mode" onclick="location.href='../../AdminPanel/Login.html'"/>
-                <input type="button" value="Restart" name="RestartConfig" onclick="location.href='../index.html'"/>
+                
+                <input type="button" value="Restart" name="RestartConfig" onclick="location.href='../MainPages/ComponentsPanel/MBSystemPage.jsp'"/>
             </div>
         </div>
     </body>

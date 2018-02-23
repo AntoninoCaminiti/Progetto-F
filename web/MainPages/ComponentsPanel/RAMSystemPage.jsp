@@ -5,7 +5,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
+    
     String mbcod = null;
     
     if(request.getSession().getAttribute("mbCod")!=null)
@@ -33,10 +33,6 @@
        
     }
     
-    //request.getSession().setAttribute("cpuCod", cpucod);
-    
-    confSave.setCPUCod(cpucod);
-    session.setAttribute("confSave", confSave);
     String cpuData = null;
     if(cpucod!=null)
     {
@@ -58,7 +54,7 @@
     {
         ramField = new ComponentParser().getComponent("RAM", ramcod);
     }*/
-    System.out.print("Finally "+ confSave.getMBCod() + " "+ confSave.getRAMCod() + " "+ confSave.getGCCod() + " "+ confSave.getPSCod() + " "+ confSave.getHDCod() + " "+ confSave.getPCCod() + " ");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -81,7 +77,7 @@
         <%} 
         else {%>
             Welcome <a href="./../../Users/UserManagement.jsp" > <%=session.getAttribute("userid")%> </a>
-            <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../User/Logout.jsp'"/>
+            <input type="button" value="LOGOUT" name="sign-in" onclick="location.href='../../Users/Logout.jsp'"/>
             <%}%>
         </div>
         <div class="sidebar">

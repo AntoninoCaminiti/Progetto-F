@@ -1,6 +1,11 @@
 package Test;
 import DatabaseElements.DBFilters;
 import Components.*;
+import DatabaseElements.DBComponentController;
+import DatabaseElements.DatabaseInit;
+import Exceptions.ComponentLoadingException;
+import Exceptions.NoCPUMatchedException;
+import Exceptions.NoRAMMatchedException;
 import java.sql.*;
 /**
  *
@@ -11,42 +16,59 @@ public class testDBFilters {
         DBFilters filterTest1 = null;
         try{
             //Connessione
+            new DatabaseInit().setConn("localhost", "Components", "root", "untothedead94");
             filterTest1 = new DBFilters();
-            filterTest1.Connect();
+            
+            //filterTest1.Connect();
             
             CPULoader testCpu;
             RAMLoader testRam;
-            MBLoader testMb;
-            //TEST ISSELECTED
-            testMb = filterTest1.iSelected();
-            //Stampa la lista dei brand della motherboard
-            System.out.println("+++"+testMb.listBrands());
+            MBLoader testMb = new DBComponentController().loadMB();
             
-            //TEST ISSELECTED2
+            
+            //Stampa la lista dei brand e  della motherboard
+            //testMb.printAll();
+            
+            
+            //TEST filterCPU
             //Filtraggio CPU data brand e model di componente MB "ESISTENTE"
-            testCpu = filterTest1.iSelected2("ASRock", "970 EXTREME4");
-            System.out.println(testCpu.listBrands());
+            //testCpu = filterTest1.filterCPU("ASRock", "970 EXTREME4");
+            //System.out.println(testCpu.listBrands());
             //Filtraggio CPU data brand e model di componente MB "NON ESISTENTE"
-            testCpu = filterTest1.iSelected2("Asus", "Z170-A");
-            System.out.println(testCpu.listBrands());
+            //testCpu = filterTest1.filterCPU("Asus", "Z170-A");
+            //testCpu.printAll();
             
-            //TEST CPUFILTERED
+            //TEST filterCPU
             //Filtraggio CPU data codice di componente MB "ESISTENTE"
-            testCpu = filterTest1.cpuFiltered("1004");
-            System.out.println(testCpu.listBrands());
+            testCpu = filterTest1.filterCPU("1016");
+            testCpu.printAll();
             //Filtraggio CPU data codice di componente MB "NON ESISTENTE"
-            testCpu = filterTest1.cpuFiltered("1604");
+            testCpu = filterTest1.filterCPU("1604");
             System.out.println(testCpu.listBrands());
             
-            //TEST ISSELECTED3
+            //TEST filterRAM
             //Filtraggio RAM data brand e model di componente MB "ESISTENTE"
-            testRam = filterTest1.isSelected3("ASRock", "970 EXTREME4");
+            testRam = filterTest1.filterRAM("ASRock", "970 EXTREME4");
             System.out.println(testRam.listBrands());
             //Filtraggio RAM data brand e model di componente MB "NON ESISTENTE"
-            testRam = filterTest1.isSelected3("Asus", "Z170-A");
+            testRam = filterTest1.filterRAM("Asus", "Z170-A");
             System.out.println(testRam.listBrands());
         }
+        catch(ComponentLoadingException ex)
+        {
+            System.err.println(ex.getMessage());
+        }
+        catch(NoCPUMatchedException ncm)
+        {
+            System.err.println(ncm.getMessage());
+        }
+        catch(NoRAMMatchedException nrm)
+        {
+            System.err.println(nrm.getMessage());
+        }
         catch(SQLException sr)
-        {}
+        {
+            System.err.println(sr.getMessage());
+        }
     }
 }

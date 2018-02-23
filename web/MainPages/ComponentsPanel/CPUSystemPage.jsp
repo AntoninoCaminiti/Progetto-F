@@ -5,22 +5,16 @@
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
+    
     String mbcod = "";
     Double price = null;
     
-    /*if(request.getParameter("mbCod") != null){
-        mbcod = request.getParameter("mbCod");
-        request.getSession().setAttribute("mbCod", mbcod);
-    }*/
     if(new CookiesHandler().getCookie("MBCOD", request)!=null)
     {
         mbcod = new CookiesHandler().getCookie("MBCOD", request);
-       
     }
 
     
-    /**/
     if(request.getParameter("price") != null){
         price = Double.parseDouble(request.getParameter("price"));
         new Cookie("PRICE", request.getParameter("price"));
@@ -29,13 +23,7 @@
     {
         price = Double.parseDouble(new CookiesHandler().getCookie("PRICE", request));
     }
-    confSave.setMBCod(mbcod);
-    session.setAttribute("confSave", confSave);
-    //request.getSession().setAttribute("price", price);
-    //if(request.getSession().getAttribute("price")!=null)
-    //{
-     //   price = (Double) request.getSession().getAttribute("price");
-    //}
+
     
     String input [] = null;
     String brand = null;
@@ -47,9 +35,6 @@
         model = input[1];
     }
     
-    
-    
-    //System.out.println(brand + " " + model);
     //CPU data init. for return case
     String cpuField=null;
     String cpucod = null;

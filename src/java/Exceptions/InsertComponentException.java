@@ -9,14 +9,14 @@ package Exceptions;
  *
  * @author user
  */
-public class ErrorInsertComponent extends Exception {
+public class InsertComponentException extends Exception {
 
     /**
      * Creates a new instance of <code>ErrorInserComponent</code> without detail
      * message.
      */
-    public ErrorInsertComponent() {
-        super("This component already exists! Wait a second.. You will be automatically redirected to the correct page..");
+    public InsertComponentException() {
+        super("This component already exists!");
     }
     
     public String toString()
