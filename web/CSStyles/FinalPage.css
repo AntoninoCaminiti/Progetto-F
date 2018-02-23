@@ -24,7 +24,7 @@ body {
 }
 .header {
     grid-area: header;
-    background-color: #74AFAD;
+    background-color: transparent;
     font-family: bold;
     color: white;
 }
@@ -104,6 +104,16 @@ input[type=text]{
 .btn:hover:after {
   -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
   transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+input[type=button]{
+    width:120px;
+    height:40px;
+    float: right;
+    background-color: #558C89;
+    border:none;
+    color:#fff;
+    font-family:'Droid Serif',serif;
 }
 
 .link {

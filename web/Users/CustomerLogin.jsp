@@ -12,8 +12,7 @@
     rs = st.executeQuery("select * from CustomerLogin where USERNAME='" + userid + "' and PASS='" + pwd + "'");
     if (rs.next()) {
         session.setAttribute("userid", userid);
-        
-       response.sendRedirect(request.getParameter("uref"));
+        response.sendRedirect(request.getParameter("uref"));
     } else {
         out.println("Invalid password <a href='Login.html'>try again</a>");
     }

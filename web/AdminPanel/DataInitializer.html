@@ -1,30 +1,28 @@
 <html>
     <head>
-        <title>Data initializer</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VIRTUAL - Data initializer</title>
+        <link rel="stylesheet" type="text/css" href="../CSStyles/LoginStyle.css">
+        <link rel="icon" href="./../CSStyles/projectIcon.png" type="image/png"/>
     </head>
     <body>
-        
-        <form action="DataInitializer.jsp" method="POST">
-            
-            
-            Host: <p><input type="text" value="den1.mysql2.gear.host" id="host" name="host"/><p>
-            Database name: <p><input type="text" value="progettof" id="database" name="database"/><p>
-            Username: <p><input type="text" value="progettof" id="username" name="username"/><p>
-            Password: <p><input type="password" value="Antonino-00" id="password" name="password"/><p>
-            <input type="submit" onclick="check()" value="Connetti"/>
-            
-        </form>
-        
+        <div class="login-page">
+            <div class="form">
+                <form action="DataInitializer.jsp" method="POST">
+                    Host: <p><input type="text" value="den1.mysql2.gear.host" id="host" name="host"/><p>
+                    Database name: <p><input type="text" value="progettof" id="database" name="database"/><p>
+                    Username: <p><input type="text" value="progettof" id="username" name="username"/><p>
+                    Password: <p><input type="password" value="Antonino-00" id="password" name="password"/><p>
+                    <input type="submit" onclick="check()" value="Connect"/>
+                </form>
+            </div>
+        </div>
         <script>
-            
             function check(){
                 if(document.getElementById("host").value == "" || document.getElementById("database").value == "" || document.getElementById("username").value == "" || document.getElementById("password").value == "")
                     alert("Complete form providing all data");
             }
-            
-            </script>
-        
+        </script>
     </body>
 </html>

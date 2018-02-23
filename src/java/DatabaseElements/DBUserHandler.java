@@ -36,7 +36,7 @@ public class DBUserHandler extends DBConnection {
     public Boolean addAdmin(String uAdmin, String pAdmin) throws SQLException
     {
         Boolean st = false;
-        if(checkUser(uAdmin) == false)
+        if(checkAdmin(uAdmin) == false)
         {
             stmt.executeUpdate("insert into ADMINLOGIN (USERNAME, PASS) values ('" + uAdmin + "','" + pAdmin + "')");
             System.out.println("Amministratore " + uAdmin + " creato");
@@ -55,6 +55,26 @@ public class DBUserHandler extends DBConnection {
         Boolean st = false;
         try{
             res = stmt.executeQuery("select USERNAME from CustomerLogin");
+            while(res.next())
+            {
+                if(name.equals(res.getString(1)))
+                {
+                    st = true;
+                }
+            }
+        }
+        catch(SQLException ex)
+        {
+            System.out.println(ex);
+        }
+        return st;
+    }
+    
+    public Boolean checkAdmin(String name)
+    {
+        Boolean st = false;
+        try{
+            res = stmt.executeQuery("select USERNAME from adminlogin");
             while(res.next())
             {
                 if(name.equals(res.getString(1)))

@@ -18,6 +18,6 @@
     {}
     else
     {
-        response.sendRedirect("ExistingUserError.jsp");   
+        response.sendRedirect("../../ErrorPages/ExistingUserError.jsp");   
     }
 %>

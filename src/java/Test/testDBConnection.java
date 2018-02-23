@@ -26,7 +26,7 @@ public class testDBConnection {
             db.loadRAM(testRam1);
             testRam1.printAll();
             //TEST FILLDBCPU
-            db.filldbCPU("INTEL", "i5-300k", "LGA1151", 2.0 , 3, 50, 60.0);
+            //db.filldbCPU("INTEL", "i5-300k", "LGA1151", 2.0 , 3, 50, 60.0);
             //TEST REMOVESHRT (con codice inesistente ed esistente)
             db.removeShrt("cpu", "2026"); //Se quella che non funziona va prima non continua ad usare removeshrt per un altro.
             db.removeShrt("cpu", "2007");

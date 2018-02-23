@@ -70,7 +70,7 @@
     </head>
     <body>
     <div class="grid">
-        <div class="header">BANNER</div>
+        <div class="header"><img src="../../CSStyles/IconComponents/Banner1.png"></div>
         <div class="navbar">
         <%//Success of login
         if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
@@ -154,7 +154,7 @@
                 <input type="hidden" id="price" name="price"/>
                 <input type="submit" disabled="" id="nextbtn" value="Next"/>
             </form>
-            <a href="javascript:history.go(-1)" onMouseOver="document.referrer; return true;"><input type="button" value="Previous"></a>
+            <a href="javascript:history.go(-1)" onMouseOver="document.referrer; return true;"><input type="button" class="btnPrev" value="Previous"></a>
             <!--input  type="button" value="Previous" name="previous" onclick="location.href=urlBackward"/-->
             <!--input  type="button" value="Next" name="next" onclick="location.href=urlForward"/-->
             <!--a href="javascript:history.go(-1)" onMouseOver="self.status.referrer; return true;"><input type="button" value="Previous"></a-->

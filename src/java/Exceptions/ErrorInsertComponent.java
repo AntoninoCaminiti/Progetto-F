@@ -16,15 +16,11 @@ public class ErrorInsertComponent extends Exception {
      * message.
      */
     public ErrorInsertComponent() {
-        
-        super("This component already exists.");
-        
+        super("This component already exists! Wait a second.. You will be automatically redirected to the correct page..");
     }
-    
     
     public String toString()
     {
         return getMessage();
     }
-
 }

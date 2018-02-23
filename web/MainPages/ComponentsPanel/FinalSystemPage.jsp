@@ -148,7 +148,7 @@
     </head>
     <body>
         <div class="grid">
-            <div class="header">BANNER</div>
+            <div class="header"><img src="../../CSStyles/IconComponents/Banner1.png"></div>
             <div class="navbar">
                 <%//Success of login
                 if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
