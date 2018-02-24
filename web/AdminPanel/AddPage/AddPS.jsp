@@ -19,19 +19,19 @@
     double db1 = Double.parseDouble(Stringa8);
 
     try{
-        DBConnection db = new DBConnection();
+        DBComponentController db = new DBComponentController();
         PSLoader ps = new PSLoader();
         db.Connect();
         db.filldbPS(Stringa1, Stringa2, Stringa3, Stringa4, Stringa5, Int1, Stringa7, db1);
         out.print("<meta http-equiv=\"refresh\" content=\"0; url=../CompPage/PowerSupplyPage.jsp\" />");
     }
-    catch(ErrorInsertComponent eic)
+    catch(InsertComponentException eic)
     {
         out.println("<font size =\"100\" color=\"red\">" + eic.getMessage() + "</font>");
         out.print("<meta http-equiv=\"refresh\" content=\"3; url=../CompPage/PowerSupplyPage.jsp\" />");
         
     }
     catch(SQLException ex){
-        out.println("Connessione fallita.");
+        out.println(ex.getMessage());
     }
 %>

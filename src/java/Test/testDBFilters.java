@@ -16,7 +16,9 @@ public class testDBFilters {
         DBFilters filterTest1 = null;
         try{
             //Connessione
-            new DatabaseInit().setConn("localhost", "Components", "root", "untothedead94");
+            
+            
+            DatabaseInit.getInstance().setConn("", "", "", "");
             filterTest1 = new DBFilters();
             
             //filterTest1.Connect();

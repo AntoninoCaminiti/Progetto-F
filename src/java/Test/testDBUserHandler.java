@@ -34,7 +34,7 @@ public class testDBUserHandler {
         }
         catch(SQLException e)
         {
-            System.err.println("Errsql");
+            System.err.println(e.getMessage());
         }
     }
 }

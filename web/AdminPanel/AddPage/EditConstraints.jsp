@@ -13,11 +13,14 @@
     String cpuStatus = request.getParameter("cpustatus");
     String ramStatus = request.getParameter("ramstatus");
     
-    //System.out.println("CPU: " + cpuStatus);
-    //System.out.println("RAM: " + ramStatus);
-    if(cpuStatus.equals("true")) new DBUserHandler().setCPUStatusConstr(true);
-    if(cpuStatus.equals("false")) new DBUserHandler().setCPUStatusConstr(false);
-    if(ramStatus.equals("true")) new DBUserHandler().setRAMStatusConstr(true);
-    if(ramStatus.equals("false")) new DBUserHandler().setRAMStatusConstr(false);
-
+    try{
+        if(cpuStatus.equals("true")) new DBUserHandler().setCPUStatusConstr(true);
+        if(cpuStatus.equals("false")) new DBUserHandler().setCPUStatusConstr(false);
+        if(ramStatus.equals("true")) new DBUserHandler().setRAMStatusConstr(true);
+        if(ramStatus.equals("false")) new DBUserHandler().setRAMStatusConstr(false);
+    }
+    catch(SQLException e)
+    {
+        out.println(e.getMessage());
+    }
 %>

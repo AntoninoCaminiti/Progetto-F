@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DatabaseElements.DatabaseInit" %>
-
+<%@page import="DatabaseElements.*" %>
+<%@ page import="java.sql.*" %>
 
 <%
     String host = request.getParameter("host");
@@ -8,14 +8,17 @@
     String username = request.getParameter("username");
     String password = request.getParameter("password");
 
-    if(!host.equals("") && !database.equals("") && !username.equals("") && !password.equals(""))
-    {
-        new DatabaseInit().setConn(host, database, username, password);
+    try{
+    
+        DatabaseInit.getInstance().setConn(host, database, username, password);
+        DBConnection test = new DBConnection();
+        test.Connect();
+        test.closeall();
         response.sendRedirect("../index.html");
+    
     }
-    else
-    {
-        response.sendRedirect("DataInitializer.html");
+    catch(SQLException e){
+        response.sendRedirect("../ErrorPages/WrongDataInitError.html");
     }
 
     

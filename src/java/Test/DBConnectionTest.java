@@ -20,7 +20,7 @@ public class DBConnectionTest {
         DBConnection db = new DBConnection();
         
         try{
-        new DatabaseInit().setConn("", "", "", "");
+        DatabaseInit.getInstance().setConn("", "", "", "");
         db.Connect();
         db.closeall();
         

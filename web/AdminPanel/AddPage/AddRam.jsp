@@ -23,19 +23,19 @@
     String Stringa9 = new String (request.getParameter("price"));
     double db1 = Double.parseDouble(Stringa9);
     try{
-        DBConnection db = new DBConnection();
+        DBComponentController db = new DBComponentController();
         RAMLoader rm = new RAMLoader();
         db.Connect();
         db.filldbRAM(Stringa1, Stringa2, Stringa3, Stringa4, Int1, Int2, Int3, Int4, db1);
         out.print("<meta http-equiv=\"refresh\" content=\"0; url=../CompPage/RamPage.jsp\" />");
     }
-    catch(ErrorInsertComponent eic)
+    catch(InsertComponentException eic)
     {
         out.println("<font size =\"100\" color=\"red\">" + eic.getMessage() + "</font>");
         out.print("<meta http-equiv=\"refresh\" content=\"3; url=../CompPage/RamPage.jsp\" />");
         
     }
     catch(SQLException ex){
-            out.println("Connessione fallita.");
+            out.println(ex.getMessage());
     }
 %>

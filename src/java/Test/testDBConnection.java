@@ -16,7 +16,7 @@ public class testDBConnection {
         RAMLoader testRam1;
         
         try{
-            new DatabaseInit().setConn("", "", "", "");
+            DatabaseInit.getInstance().setConn("", "", "", "");
             //Apertura della connessione
             db = new DBComponentController();
             //TEST LOADRAM

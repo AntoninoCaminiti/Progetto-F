@@ -15,7 +15,9 @@
     DBUserHandler db = new DBUserHandler();
     
     if(db.addAdmin(Stringa1, Stringa2)==true)
-    {}
+    {
+    
+    }
     else
     {
         response.sendRedirect("../../ErrorPages/ExistingUserError.jsp");   

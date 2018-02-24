@@ -54,24 +54,4 @@ public class ComponentParser extends DBConnection {
         
         return pricef.format(price);
     }
-    
-    public static void main(String[] args) {
-        try{
-        ComponentParser c = new ComponentParser();
-            System.out.println(c.getComponent("HDRIVE", "5002"));
-        ArrayList<String> a = new ArrayList<>();
-        a.add("1003");
-        a.add("2011");
-        a.add("3004");
-        a.add("4004");
-        a.add("5002");
-        a.add("6004");
-        a.add("7007");
-            System.out.println(c.getPrice(a));
-        }
-        catch(SQLException e)
-        {
-            System.err.println(e);
-        }
-    }
 }

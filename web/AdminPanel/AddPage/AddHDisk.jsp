@@ -23,18 +23,18 @@
     double db1 = Double.parseDouble(Stringa9);
 
     try{
-        DBConnection db = new DBConnection();
+        DBComponentController db = new DBComponentController();
         db.Connect();
         db.filldbHDrive(Stringa1, Stringa2, Stringa3, Stringa4, Stringa5, Int1, Int2, Int3, db1);
         out.print("<meta http-equiv=\"refresh\" content=\"0; url=../CompPage/HDiskPage.jsp\" />");
     }
-    catch(ErrorInsertComponent eic)
+    catch(InsertComponentException eic)
     {
         out.println("<font size =\"100\" color=\"red\">" + eic.getMessage() + "</font>");
         out.print("<meta http-equiv=\"refresh\" content=\"3; url=../CompPage/HDiskPage.jsp\" />");
         
     }
     catch(SQLException ex){
-            out.println("Connessione fallita.");
+            out.println(ex.getMessage());
     }
 %>

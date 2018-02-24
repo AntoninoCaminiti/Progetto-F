@@ -78,20 +78,5 @@ public class UserConfigCreator extends DBConnection {
                     
         output = sb.toString();
         return output;
-    }
-    
-    public static void main(String[] args) {
-        
-        try{
-            UserConfigCreator ucf = new UserConfigCreator();
-                System.out.println(ucf.createTable("ILKROCCIA"));
-        }
-        catch(SQLException sql)
-        {
-            System.out.println(sql.getMessage());
-        }
-
-    }
-    
-    
+    }    
 }

@@ -10,12 +10,27 @@ package DatabaseElements;
  * @author user
  */
 public class DatabaseInit {
+    private static  DatabaseInit instance;
+    private static String host;
+    private static String database;
+    private static String username;
+    private static String password;
     
-    private static String host = "";
-    private static String database = "";
-    private static String username = "";
-    private static String password = "";
+    protected DatabaseInit()
+    {
+        host = "";
+        database = "";
+        username = "";
+        password = "";
+    }
     
+    public static DatabaseInit getInstance()
+    {
+        if(instance == null){
+            instance = new DatabaseInit();
+        }
+        return instance;
+    }
     
     public void setConn(String host, String database, String username, String password)
     {
@@ -27,24 +42,20 @@ public class DatabaseInit {
         this.password = password;
         }
     }
-    
-    
-    
-    
 
-    public String getHost() {
+    public static String getHost() {
         return host;
     }
 
-    public String getDatabase() {
+    public static String getDatabase() {
         return database;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return password;
     }
     

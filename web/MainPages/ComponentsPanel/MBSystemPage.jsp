@@ -79,6 +79,10 @@
                     {
                         response.sendRedirect("../../ErrorPages/index.html");
                     }
+                    catch(SQLException s)
+                    {
+                        response.sendRedirect("../../ErrorPages/index.html");
+                    }
                 %>
                 <!--Sending data to next page-->
                 <script>

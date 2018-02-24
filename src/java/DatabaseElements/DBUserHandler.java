@@ -50,69 +50,49 @@ public class DBUserHandler extends DBConnection {
         return st;
     }
     
-    public Boolean checkUser(String name)
+    public Boolean checkUser(String name) throws SQLException
     {
         Boolean st = false;
-        try{
-            res = stmt.executeQuery("select USERNAME from CustomerLogin");
-            while(res.next())
+        res = stmt.executeQuery("select USERNAME from CustomerLogin");
+        while(res.next())
+        {
+            if(name.equals(res.getString(1)))
             {
-                if(name.equals(res.getString(1)))
-                {
-                    st = true;
-                }
+                st = true;
             }
         }
-        catch(SQLException ex)
+        
+        return st;
+    }
+    
+    public Boolean checkAdmin(String name) throws SQLException
+    {
+        Boolean st = false;
+        res = stmt.executeQuery("select USERNAME from adminlogin");
+        while(res.next())
         {
-            System.out.println(ex);
+            if(name.equals(res.getString(1)))
+            {
+                st = true;
+            }
         }
         return st;
     }
     
-    public Boolean checkAdmin(String name)
+    public Boolean getCPUStatusConstr() throws SQLException
     {
-        Boolean st = false;
-        try{
-            res = stmt.executeQuery("select USERNAME from adminlogin");
-            while(res.next())
-            {
-                if(name.equals(res.getString(1)))
-                {
-                    st = true;
-                }
-            }
-        }
-        catch(SQLException ex)
-        {
-            System.out.println(ex);
-        }
-        return st;
-    }
-    
-    public Boolean getCPUStatusConstr(){
         Boolean status = true;
-        
-        try{
-            res = mystmt.executeQuery("select CPUFLAG from ADMINCONTROLS");
-            while(res.next())
-            {
-                if(res.getInt(1)==1) status = true;
-                if(res.getInt(1)==0) status = false;   
-            }
-        }
-        catch(SQLException e)
+        res = mystmt.executeQuery("select CPUFLAG from ADMINCONTROLS");
+        while(res.next())
         {
-            System.out.println(e);
+            if(res.getInt(1)==1) status = true;
+            if(res.getInt(1)==0) status = false;   
         }
-        
         return status;
     }
     
-    public void setCPUStatusConstr(Boolean status)
+    public void setCPUStatusConstr(Boolean status) throws SQLException
     {
-        try
-        {
             if(status == false)
             {
                 mystmt.executeUpdate("update ADMINCONTROLS set CPUFLAG = 0");
@@ -121,37 +101,23 @@ public class DBUserHandler extends DBConnection {
             {
                 mystmt.executeUpdate("update ADMINCONTROLS set CPUFLAG = 1");
             }
-        }
-        catch(SQLException e)
-        {
-            
-        }
-        
     }
     
-        public Boolean getRAMStatusConstr(){
+    public Boolean getRAMStatusConstr() throws SQLException
+    {
         Boolean status = true;
-        
-        try{
-            res = mystmt.executeQuery("select RAMFLAG from ADMINCONTROLS");
-            while(res.next())
-            {
-                if(res.getInt(1)==1) status = true;
-                if(res.getInt(1)==0) status = false;   
-            }
-        }
-        catch(SQLException e)
+        res = mystmt.executeQuery("select RAMFLAG from ADMINCONTROLS");
+        while(res.next())
         {
-            System.out.println(e);
+            if(res.getInt(1)==1) status = true;
+            if(res.getInt(1)==0) status = false;   
         }
         
         return status;
-    }
+    }    
     
-    public void setRAMStatusConstr(Boolean status)
+    public void setRAMStatusConstr(Boolean status) throws SQLException
     {
-        try
-        {
             if(status == false)
             {
                 mystmt.executeUpdate("update ADMINCONTROLS set RAMFLAG = 0");
@@ -160,36 +126,5 @@ public class DBUserHandler extends DBConnection {
             {
                 mystmt.executeUpdate("update ADMINCONTROLS set RAMFLAG = 1");
             }
-        }
-        catch(SQLException e)
-        {
-            
-        }
-        
     }
-    
-    public static void main(String[] args)
-    {
-        DBUserHandler db;
-        
-        try{
-            
-            db = new DBUserHandler();
-            //db.addUser("giovanna", "yoo", "edfcdfv@csdc.it", "eeeeeeeee");
-            //
-            System.out.println(db.getCPUStatusConstr());
-            //db.setStatusComp(false);
-            //System.out.println(db.checkUser("sdighidibughidi"));
-            //System.out.println(db.checkUser("Giovanna"));
-            
-        }
-        catch(SQLException e)
-        {
-            System.err.println("Errsql");
-            
-        }
-        
-        
-    }
-    
 }

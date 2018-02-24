@@ -22,7 +22,7 @@ public class DBConnection
         conn = null;
         mystmt = null;
         res = null;
-        data = new DatabaseInit();
+        data = DatabaseInit.getInstance();
     } 
     
     

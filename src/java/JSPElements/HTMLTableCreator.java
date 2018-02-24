@@ -15,7 +15,7 @@ import Exceptions.NoRAMMatchedException;
 import java.sql.SQLException;
 
 public class HTMLTableCreator {
-    public static String createMotherboard(Boolean f)
+    public static String createMotherboard(Boolean f) throws SQLException
     {
         String output;
         StringBuilder ss = new StringBuilder();
@@ -87,9 +87,7 @@ public class HTMLTableCreator {
         {
             ss.append(cle.getMessage());
         }
-        catch(SQLException ex){
-            ss.append(ex.getMessage());
-        }
+
         output = ss.toString();
         return output;
     }
@@ -573,11 +571,5 @@ public class HTMLTableCreator {
     }
 
     
-    public static void main(String[] args) {
-        //set conn first
-        new DatabaseInit().setConn("", "", "", "");
-        HTMLTableCreator hd = new HTMLTableCreator();
-        System.out.println(hd.createMotherboard(true));
-        System.out.println(hd.createCPU(false, true, "MSI", "B150M BAZOOKA"));
-    }
+
 }

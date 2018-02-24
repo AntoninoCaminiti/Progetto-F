@@ -19,14 +19,17 @@ import java.sql.SQLException;
 public class DBComponentControllerTest {
     
         public static void main(String[] args) {
-        new DatabaseInit().setConn("localhost", "Components", "root", "untothedead94");
+        
         
         try{
+            DatabaseInit.getInstance().setConn("", "", "", "");
             DBComponentController dbc = new DBComponentController();
             
             CPULoader cpu = dbc.loadCPU();
             cpu.printAll();
             dbc.filldbCPU("AMD", "FX-8320", "AM3", 3.0, 5, 3, 179.0);
+            cpu.printAll();
+            dbc.closeall();
         }
         catch(InsertComponentException dbe){
             System.err.println(dbe.getMessage());
@@ -37,7 +40,7 @@ public class DBComponentControllerTest {
         }
         catch(SQLException sq)
         {
-            
+            System.err.println(sq.getMessage());
         }
     }
     

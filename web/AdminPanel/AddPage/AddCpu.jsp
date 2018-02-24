@@ -21,19 +21,19 @@
     double db2 = Double.parseDouble(Stringa8);
 
     try{
-        DBConnection db = new DBConnection();
+        DBComponentController db = new DBComponentController();
         CPULoader cp = new CPULoader();
         db.Connect();
         db.filldbCPU(Stringa1, Stringa2, Stringa3, db1, int2, int3, db2);
         out.print("<meta http-equiv=\"refresh\" content=\"0; url=../CompPage/CpuPage.jsp\" />");
     }
-    catch(ErrorInsertComponent eic)
+    catch(InsertComponentException eic)
     {
         out.println("<font size =\"100\" color=\"red\">" + eic.getMessage() + "</font>");
         out.print("<meta http-equiv=\"refresh\" content=\"3; url=../CompPage/CpuPage.jsp\" />");
         
     }
     catch(SQLException ex){
-        out.println("Connessione fallita.");
+        out.println(ex.getMessage());
     }
 %>
