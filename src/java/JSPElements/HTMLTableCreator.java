@@ -27,15 +27,15 @@ public class HTMLTableCreator {
             ss.append("<thead>");
             ss.append("<tr>");
             ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
-            ss.append("<th>Model</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
             ss.append("<th>Socket</th>");
             ss.append("<th>Formfactor</th>");
             ss.append("<th>Chipset</th>");
             ss.append("<th>RAM Slots</th>");
             ss.append("<th>RAM Type</th>");
-            ss.append("<th>RAM Capacity</th>");
+            ss.append("<th onclick=\"sortTable(7)\">RAM Capacity</th>");
             ss.append("<th>TDP</th>");
-            ss.append("<th onclick=\"sortTable(9)\">Price</th>");
+            ss.append("<th onclick=\"sortNumber(9)\">Price</th>");
             if(f == true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -67,7 +67,7 @@ public class HTMLTableCreator {
                 ss.append("<td>"+str5+"</td>");
                 ss.append("<td>"+int1+"</td>");
                 ss.append("<td>"+str6+"</td>");
-                ss.append("<td>"+int2+"</td>");
+                ss.append("<td>"+int2+ "GB" +"</td>");
                 ss.append("<td>"+int3+"</td>");
                 ss.append("<td>"+dub1+"</td>");
                 if(f == true) ss.append("<td> <form action=\"../DeletePage/DeleteMotherboard.jsp\" method=\"post\"><input type=\"hidden\" value=\" " + cod + " \" name = \"deletecod\"> <input type=\"submit\" value=\"Remove\"> </form action> </td>");
@@ -81,6 +81,7 @@ public class HTMLTableCreator {
             ss.append("</tbody>");
             ss.append("</table>");
             ss.append(TableSorter.sortTable("table1"));
+            ss.append(TableSorter.sortTablePrice("table1"));
             db.closeall();
         }
         catch(ComponentLoadingException cle)
@@ -117,13 +118,13 @@ public class HTMLTableCreator {
             ss.append("<table id=\"table2\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
-            ss.append("<th>Brand</th>");
-            ss.append("<th>Model</th>");
+            ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
             ss.append("<th>Socket</th>");
-            ss.append("<th>Frequency</th>");
-            ss.append("<th>Cores</th>");
+            ss.append("<th onclick=\"sortTable(3)\">Frequency</th>");
+            ss.append("<th onclick=\"sortTable(4)\">Cores</th>");
             ss.append("<th>TDP</th>");
-            ss.append("<th>Price</th>");
+            ss.append("<th onclick=\"sortNumber(6)\">Price</th>");
             if(f==true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -173,6 +174,8 @@ public class HTMLTableCreator {
         }	
         ss.append("</tbody>");
         ss.append("</table>");
+        ss.append(TableSorter.sortTable("table2"));
+        ss.append(TableSorter.sortTablePrice("table2"));
         output = ss.toString();
                                    
         return output;
@@ -203,15 +206,15 @@ public class HTMLTableCreator {
             ss.append("<table id=\"table3\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
-            ss.append("<th>Brand</th>");
-            ss.append("<th>Model</th>");
-            ss.append("<th>Ram Type</th>");
-            ss.append("<th>Speed</th>");
+            ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
+            ss.append("<th>DIMM Type</th>");
+            ss.append("<th>Type</th>");
             ss.append("<th>TDP</th>");	
             ss.append("<th>Modules</th>");
-            ss.append("<th>Modules Size</th>");
-            ss.append("<th>Size</th>");
-            ss.append("<th>Price</th>");
+            ss.append("<th onclick=\"sortNumber(6)\">Modules Size</th>");
+            ss.append("<th onclick=\"sortNumber(7)\">Size</th>");
+            ss.append("<th onclick=\"sortNumber(8)\">Price</th>");
             if(f==true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -242,8 +245,8 @@ public class HTMLTableCreator {
                 ss.append("<td>"+str4+"</td>");
                 ss.append("<td>"+int1+"</td>");
                 ss.append("<td>"+int2+"</td>");
-                ss.append("<td>"+int3+"</td>");
-                ss.append("<td>"+int4+"</td>");
+                ss.append("<td>"+int3+ "GB" +"</td>");
+                ss.append("<td>"+int4 + "GB" +"</td>");
                 ss.append("<td>"+db1+"</td>");
                 if(f==true) ss.append("<td> <form action=\"../DeletePage/DeleteRam.jsp\" method=\"post\"> <input type=\"hidden\" value=\" " + cod + " \" name = \"deletecod\"> <input type=\"submit\" value=\"Remove\"> </form action> </td>");
                 ss.append("<td");
@@ -268,6 +271,8 @@ public class HTMLTableCreator {
         }	
         ss.append("</tbody>");
         ss.append("</table>");
+        ss.append(TableSorter.sortTable("table3"));
+        ss.append(TableSorter.sortTablePrice("table3"));
         output = ss.toString();
                                    
         return output;
@@ -289,15 +294,15 @@ public class HTMLTableCreator {
             ss.append("<table id=\"table4\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
-            ss.append("<th>Brand</th>");
-            ss.append("<th>Model</th>");
+            ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
             ss.append("<th>Series</th>");
             ss.append("<th>Chipset</th>");
-            ss.append("<th>Memory</th>");
+            ss.append("<th onclick=\"sortNumber(4)\">Memory</th>");
             ss.append("<th>Core Clock</th>");
             ss.append("<th>TDP</th>");	
             ss.append("<th>Length</th>");
-            ss.append("<th>Price</th>");
+            ss.append("<th onclick=\"sortNumber(8)\">Price</th>");
             if(f==true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -323,7 +328,7 @@ public class HTMLTableCreator {
                 ss.append("<td>"+str2+"</td>");
                 ss.append("<td>"+str3+"</td>");
                 ss.append("<td>"+str4+"</td>");
-                ss.append("<td>"+int1+"</td>");
+                ss.append("<td>"+int1+ "GB"+"</td>");
                 ss.append("<td>"+db1+"</td>");
                 ss.append("<td>"+int2+"</td>");
                 ss.append("<td>"+int3+"</td>");
@@ -337,6 +342,8 @@ public class HTMLTableCreator {
             }
             ss.append("</tbody>");
             ss.append("</table>");
+            ss.append(TableSorter.sortTable("table4"));
+            ss.append(TableSorter.sortTablePrice("table4"));
             dbc.closeall();
         }
         catch(ComponentLoadingException cle)
@@ -366,15 +373,15 @@ public class HTMLTableCreator {
             ss.append("<table id=\"table5\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
-            ss.append("<th>Brand</th>");
-            ss.append("<th>Model</th>");
+            ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
             ss.append("<th>Series</th>");
             ss.append("<th>Form</th>");
             ss.append("<th>Type</th>");
-            ss.append("<th>Size</th>");
+            ss.append("<th onclick=\"sortNumber(5)\">Size</th>");
             ss.append("<th>TDP</th>");
             ss.append("<th>Cache</th>");
-            ss.append("<th>Price</th>");
+            ss.append("<th onclick=\"sortNumber(8)\">Price</th>");
             if(f==true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -401,7 +408,7 @@ public class HTMLTableCreator {
                 ss.append("<td>"+str3+"</td>");
                 ss.append("<td>"+str4+"</td>");
                 ss.append("<td>"+str5+"</td>");
-                ss.append("<td>"+int1+"</td>");
+                ss.append("<td>"+int1+ "GB" +"</td>");
                 ss.append("<td>"+int2+"</td>");
                 ss.append("<td>"+int3+"</td>");
                 ss.append("<td>"+db1+"</td>");
@@ -413,6 +420,8 @@ public class HTMLTableCreator {
             }		
             ss.append("</tbody>");
             ss.append("</table>");
+            ss.append(TableSorter.sortTable("table5"));
+            ss.append(TableSorter.sortTablePrice("table5"));
             db.closeall();
         }
         catch(ComponentLoadingException cle)
@@ -440,14 +449,14 @@ public class HTMLTableCreator {
             ss.append("<table id=\"table6\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
-            ss.append("<th>Brand</th>");
-            ss.append("<th>Model</th>");
+            ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
             ss.append("<th>Series</th>");
             ss.append("<th>Form</th>");
             ss.append("<th>Efficiency</th>");
-            ss.append("<th>TDP</th>");
+            ss.append("<th onclick=\"sortNumber(5)\">TDP</th>");
             ss.append("<th>Modular</th>");
-            ss.append("<th>Price</th>");
+            ss.append("<th onclick=\"sortNumber(7)\">Price</th>");
             if(f==true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -495,6 +504,8 @@ public class HTMLTableCreator {
         ss.append(ex.getMessage());
         }
         
+        ss.append(TableSorter.sortTable("table6"));
+        ss.append(TableSorter.sortTablePrice("table6"));
         output = ss.toString();
         
         return output;
@@ -513,13 +524,13 @@ public class HTMLTableCreator {
             ss.append("<table id=\"table7\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
-            ss.append("<th>Brand</th>");
-            ss.append("<th>Model</th>");
+            ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
             ss.append("<th>Type</th>");
             ss.append("<th>Color</th>");
             ss.append("<th>Compatibility</th>");
-            ss.append("<th>Length Max</th>");
-            ss.append("<th>Price</th>");
+            ss.append("<th onclick=\"sortNumber(5)\">Length Max</th>");
+            ss.append("<th onclick=\"sortNumber(6)\">Price</th>");
             if(f==true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -555,6 +566,8 @@ public class HTMLTableCreator {
             }		
             ss.append("</tbody>");
             ss.append("</table>");
+            ss.append(TableSorter.sortTable("table7"));
+            ss.append(TableSorter.sortTablePrice("table7"));
             db.closeall();
         }
         catch(ComponentLoadingException cle)
