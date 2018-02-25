@@ -73,7 +73,7 @@ public class UserConfigCreator extends DBConnection {
                         sb.append("</tbody>");
                         sb.append("</table>");
                         
-                        this.closeall();
+                        
 
                     
         output = sb.toString();

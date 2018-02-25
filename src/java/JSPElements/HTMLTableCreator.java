@@ -35,7 +35,7 @@ public class HTMLTableCreator {
             ss.append("<th>RAM Type</th>");
             ss.append("<th>RAM Capacity</th>");
             ss.append("<th>TDP</th>");
-            ss.append("<th onclick=\"sortTable(1)\">Price</th>");
+            ss.append("<th onclick=\"sortTable(9)\">Price</th>");
             if(f == true) ss.append("<th>Delete</th>");
             ss.append("<th");
             if(f == false) ss.append(" style=\"display:none;\"");
@@ -80,7 +80,7 @@ public class HTMLTableCreator {
 
             ss.append("</tbody>");
             ss.append("</table>");
-
+            ss.append(TableSorter.sortTable("table1"));
             db.closeall();
         }
         catch(ComponentLoadingException cle)

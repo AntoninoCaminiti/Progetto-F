@@ -12,7 +12,7 @@ package JSPElements;
 public class TableSorter {
     
     
-    public String sortTable(String tableName)
+    public static String sortTable(String tableName)
     {
         StringBuilder ss = new StringBuilder();
         String output;

@@ -68,7 +68,7 @@ public class DBUserHandler extends DBConnection {
     public Boolean checkAdmin(String name) throws SQLException
     {
         Boolean st = false;
-        res = stmt.executeQuery("select USERNAME from adminlogin");
+        res = stmt.executeQuery("select USERNAME from ADMINLOGIN");
         while(res.next())
         {
             if(name.equals(res.getString(1)))

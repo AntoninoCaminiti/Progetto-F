@@ -34,7 +34,9 @@
                 <center><h1><p>User <%=session.getAttribute("userid")%> - Buildings</p></h1></center>
                 <%
                     String user = (String) session.getAttribute("userid"); 
-                    out.print(new UserConfigCreator().createTable(user));
+                    Cookie userCookie = new Cookie("user", user);
+                    
+                    out.print(new UserConfigCreator().createTable(userCookie.getValue()));
                 %>
             </div>
             <div class="footer">
