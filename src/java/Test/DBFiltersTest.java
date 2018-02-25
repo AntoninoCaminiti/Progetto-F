@@ -11,7 +11,7 @@ import java.sql.*;
  *
  * @author James Abbate
  */
-public class testDBFilters {
+public class DBFiltersTest {
     public static void main(String[] args) {
         DBFilters filterTest1 = null;
         try{

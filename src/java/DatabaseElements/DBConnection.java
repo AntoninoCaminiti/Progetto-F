@@ -1,14 +1,13 @@
 package DatabaseElements;
-import Components.CPULoader;
-import Components.CaseLoader;
-import Components.GCardLoader;
-import Components.HDriveLoader;
-import Components.MBLoader;
-import Components.PSLoader;
-import Components.RAMLoader;
-import Exceptions.InsertComponentException;
 import java.sql.*;
 
+/**
+ * This class DBConnection, creates a connection with the database.
+ * <p>
+ * This class work with the database.
+ * 
+ * @author Utente
+ */
 public class DBConnection 
 {
     
@@ -17,6 +16,12 @@ public class DBConnection
     protected ResultSet res;
     private static DatabaseInit data;
     
+    /**
+     * Sets the variables conn, mystmt, res to null for the connection.
+     * Initializes the data variable with the single instance that it must contain
+     * <p>
+     * This method is the constructor method.
+     */
     public DBConnection()
     {
         conn = null;
@@ -25,11 +30,13 @@ public class DBConnection
         data = DatabaseInit.getInstance();
     } 
     
-    
-    
+     /**
+     * Use the param conn and mystmt to get a connection and to create a statement
+     * @return the statment of the connection
+     * @throws SQLException if an SQL exception occurred
+     */
     public Statement Connect() throws SQLException
     {
-        
         try{
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://"+ data.getHost() + ":3306/"+ data.getDatabase(), data.getUsername(), data.getPassword());
@@ -43,7 +50,10 @@ public class DBConnection
         return mystmt;
     }
 
-    //close all connection from MySQL database
+    /**
+     * Close connection from MySQL database.
+     * @throws SQLException if occured an SQL exception
+     */
     public void closeall() throws SQLException
     {
             if(conn!=null)

@@ -11,11 +11,28 @@ public class DBUserHandler extends DBConnection {
     Statement stmt = null;
     ResultSet res = null;
     
+    /**
+     * Sets the variables conn, mystmt, res to null for the connection.
+     * Initializes the data variable with the single instance that it must contain
+     * <p>
+     * This method is the constructor method.
+     * @throws SQLException if an SQL exception is occurred
+     */
     public DBUserHandler() throws SQLException
     {
         stmt = this.Connect();
     }
     
+    /**
+     * Insert new user with all data (id, pass, email, addr) in database
+     * <p> checking that it does not already exist
+     * @param uname the ID that customer use to connect
+     * @param pwd the pasword that customer use to connect 
+     * @param email the email that customer use to connect
+     * @param addr the addres that customer use to connect
+     * @return boolean true if user is created else return false 
+     * @throws SQLException if an SQL exception is occurred
+     */
     public Boolean addUser(String uname, String pwd, String email, String addr) throws SQLException
     {
         Boolean st = false;
@@ -33,6 +50,14 @@ public class DBUserHandler extends DBConnection {
         return st;
     }
     
+    /**
+     * Insert new user with all data (id, pass) in database
+     * <p> checking that it does not already exist
+     * @param uAdmin the ID that admin use to connect
+     * @param pAdmin the pasword that admin use to connect 
+     * @return boolean true if user is created else return false 
+     * @throws SQLException if an SQL Exception is occurred
+     */
     public Boolean addAdmin(String uAdmin, String pAdmin) throws SQLException
     {
         Boolean st = false;
@@ -50,6 +75,12 @@ public class DBUserHandler extends DBConnection {
         return st;
     }
     
+    /**
+     * Check if user already exist
+     * @param name username to check if already exist
+     * @return boolean false  if ID of customer doesn't exist else return true
+     * @throws SQLException if an SQL exception is occurred
+     */
     public Boolean checkUser(String name) throws SQLException
     {
         Boolean st = false;
@@ -65,6 +96,12 @@ public class DBUserHandler extends DBConnection {
         return st;
     }
     
+    /**
+     * Check if user already exist
+     * @param name admin username to check if already exist
+     * @return boolean false if ID of admin doesn't exist otherwise return true
+     * @throws SQLException if an SQL exception is occurred
+     */
     public Boolean checkAdmin(String name) throws SQLException
     {
         Boolean st = false;
@@ -79,6 +116,11 @@ public class DBUserHandler extends DBConnection {
         return st;
     }
     
+    /**
+     * get the status of the constraint for the CPU
+     * @return Boolean true if the constraint is on, otherwise return false
+     * @throws SQLException if an SQL Exception is occurred
+     */
     public Boolean getCPUStatusConstr() throws SQLException
     {
         Boolean status = true;
@@ -91,6 +133,11 @@ public class DBUserHandler extends DBConnection {
         return status;
     }
     
+    /**
+     * Set the constraint status of component CPU
+     * @param status of component's constraint CPU
+     * @throws SQLException if an SQL Exception is occurred 
+     */
     public void setCPUStatusConstr(Boolean status) throws SQLException
     {
             if(status == false)
@@ -103,6 +150,11 @@ public class DBUserHandler extends DBConnection {
             }
     }
     
+    /**
+     * get the status of the constraint for the CPU
+     * @return Boolean true if the constraint is on, otherwise return false
+     * @throws SQLException if an SQL Exception is occurred
+     */
     public Boolean getRAMStatusConstr() throws SQLException
     {
         Boolean status = true;
@@ -116,6 +168,11 @@ public class DBUserHandler extends DBConnection {
         return status;
     }    
     
+    /**
+     * Set the constraint status of component CPU
+     * @param status of component's constraint CPU
+     * @throws SQLException if an SQL Exception is occurred 
+     */
     public void setRAMStatusConstr(Boolean status) throws SQLException
     {
             if(status == false)

@@ -6,7 +6,7 @@ import Exceptions.InvalidListOfArgumentsException;
  *
  * @author James Abbate
  */
-public class testInvalidListOfArguments {
+public class InvalidListOfArgumentsTest {
     public static void main(String[] args) {
         try{
             throw new InvalidListOfArgumentsException();

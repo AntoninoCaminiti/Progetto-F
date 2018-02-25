@@ -7,7 +7,7 @@ import java.sql.SQLException;
  *
  * @author James Abbate
  */
-public class testDBUserHandler {
+public class DBUserHandlerTest {
     public static void main(String[] args)
     {
         DBUserHandler testDb;

@@ -1,7 +1,6 @@
 package DatabaseElements;
 
 import Components.CPULoader;
-import Components.MBLoader;
 import Components.RAMLoader;
 import Exceptions.NoCPUMatchedException;
 import Exceptions.NoRAMMatchedException;
@@ -12,11 +11,23 @@ public class DBFilters extends DBConnection {
     private Statement stmt = null;
     private ResultSet res = null;
     
+    /**
+     * Create a statement containing the connection to the database
+     * @throws SQLException if an SQL Exception occurred
+     */
     public DBFilters() throws SQLException
     {
-        stmt = this.Connect();       
+        stmt = this.Connect();
     }
     
+    /**
+     * Get CPU data from database that have socket compatible with the socket of motherboard selected.
+     * @param selectedBrand is the brand of motherboard selected
+     * @param selectedModel is the model of motherboard selected
+     * @return all values of cpu's component that respect the request
+     * @throws SQLException if an SQL exception is occurred
+     * @throws NoCPUMatchedException if no match with a CPU is found
+     */
     public CPULoader filterCPU(String selectedBrand, String selectedModel) throws SQLException, NoCPUMatchedException
     {
         CPULoader cpu = new CPULoader();
@@ -38,6 +49,13 @@ public class DBFilters extends DBConnection {
         return cpu;
     }
     
+    /**
+     * Get CPU data from database that have socket compatible with the socket of motherboard selected (using only the component code).
+     * @param cod the cod of motherboard selected
+     * @return all values of cpu's component that respect the request
+     * @throws SQLException if an SQL exception is occurred
+     * @throws NoCPUMatchedException if no match with a CPU is found
+     */
     public CPULoader filterCPU(String cod) throws SQLException, NoCPUMatchedException
     {
         CPULoader cpu = new CPULoader();
@@ -57,6 +75,14 @@ public class DBFilters extends DBConnection {
         return cpu;
     }
     
+    /**
+     * Get RAM data from database that component speed compatible with ramtype of motherboard selected.
+     * @param selectedBrand is the brand of motherboard 
+     * @param selectedModel is the model of motherboard
+     * @return all values of ram that respect the request
+     * @throws SQLException if an SQL exception occurred
+     * @throws NoRAMMatchedException if no match with a RAM is found
+     */
     public RAMLoader filterRAM(String selectedBrand, String selectedModel) throws SQLException, NoRAMMatchedException
     {
         RAMLoader r = new RAMLoader();
@@ -75,6 +101,13 @@ public class DBFilters extends DBConnection {
         return r;
     }
     
+    /**
+     * Get Ram data from database that have RamType compatible with the RamType of motherboard selected.
+     * @param cod the cod of motherboard RamType selected
+     * @return all values of cpu's component that respect the request
+     * @throws SQLException if an SQL exception is occurred
+     * @throws NoRAMMatchedException if no match with a RAM is found
+     */
     public RAMLoader filterRAM(String cod) throws SQLException, NoRAMMatchedException
     {
         RAMLoader r = new RAMLoader();

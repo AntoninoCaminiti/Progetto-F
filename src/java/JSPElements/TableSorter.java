@@ -11,7 +11,11 @@ package JSPElements;
  */
 public class TableSorter {
     
-    
+   /**
+    * Table sorting for a single information (such as a brand or model, etc.)
+    * @param tableName the id of the table that will have sorting functions
+    * @return the table 
+    */ 
     public static String sortTable(String tableName)
     {
         StringBuilder ss = new StringBuilder();
@@ -58,8 +62,12 @@ public class TableSorter {
     return output;
     }
     
-    
-        public static String sortTablePrice(String tableName)
+    /**
+    * Table sorting for numbers
+    * @param tableName the id of the table that will have sorting functions
+    * @return the table 
+    */ 
+    public static String sortTablePrice(String tableName)
     {
         StringBuilder ss = new StringBuilder();
         String output;

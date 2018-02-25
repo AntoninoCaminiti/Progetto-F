@@ -7,26 +7,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author EugeHysa
  */
 public class UserConfigCreator extends DBConnection {
-    Connection conn = null;
-                    Statement mystmt = null;
-                    ResultSet res = null;
     
+    private Connection conn = null;
+    private Statement mystmt = null;
+    private ResultSet res = null;
+    
+  /**
+   * Constructor for UserConfigCreator, which gets connection from DBConnection class
+   * @throws SQLException if an SQL Exception is occurred 
+   */
     public UserConfigCreator() throws SQLException
     {
         mystmt = this.Connect();
     }
         
-        
+    /**
+     * Create the saved buildings table, parsing all information (components info and total price) for a single save
+     * @param userid the username for the customer
+     * @return output prints the html converted table that contains the building information
+     * @throws SQLException if an SQL exception is occured 
+     */  
     public String createTable(String userid) throws SQLException
     {
-        String output = " ";
+        String output;
         StringBuilder sb = new StringBuilder();
          
                     ArrayList componentsCods = new ArrayList();

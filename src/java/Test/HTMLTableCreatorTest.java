@@ -7,7 +7,7 @@ import JSPElements.HTMLTableCreator;
  *
  * @author James Abbate
  */
-public class testHTMLTableCreator {
+public class HTMLTableCreatorTest {
     public static void main(String[] args) {
         //set conn first
         DatabaseInit.getInstance().setConn("", "", "", "");

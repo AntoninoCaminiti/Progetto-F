@@ -9,7 +9,7 @@ import java.sql.*;
  *
  * @author James Abbate
  */
-public class testDBConnection {
+public class DBConnectionNoErrorsTest {
     public static void main(String[] args) {
         
         DBComponentController db;

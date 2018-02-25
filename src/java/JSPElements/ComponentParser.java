@@ -9,10 +9,22 @@ public class ComponentParser extends DBConnection {
     Statement stmt = null;
     ResultSet res = null;
     
+    /**
+     * Create a statment to connect with database
+     * @throws SQLException if an SQL Exception is occurred
+     */
     public ComponentParser() throws SQLException
     {
         stmt = this.Connect();
     }
+    
+    /**
+     * Get a string of the brand and model of a component (using the string -CC- in order to split them) given its code 
+     * @param table the name's table that containing the component
+     * @param cod the code of the corresponding component
+     * @return the brand and the model of corresponding component
+     * @throws SQLException if an SQL exception is occurred
+     */
     public String getComponent(String table, String cod) throws SQLException
     {
         String output = " ";
@@ -27,7 +39,12 @@ public class ComponentParser extends DBConnection {
         return output;
     }                                                                                                                                                                                   
     
-    
+    /**
+     * Get the total price of a saved configuration given the set of codes in input
+     * @param data list of component's code (one code for every component) to calculate the total price
+     * @return total price of configuration
+     * @throws SQLException if an SQL exception is occurred 
+     */
     public String getPrice(ArrayList data) throws SQLException
     {
         Double price = 0.0;

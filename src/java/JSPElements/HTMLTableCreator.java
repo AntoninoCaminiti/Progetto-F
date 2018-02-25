@@ -15,6 +15,13 @@ import Exceptions.NoRAMMatchedException;
 import java.sql.SQLException;
 
 public class HTMLTableCreator {
+    
+     /**
+     * Create motherboard table containing data
+     * @param f boolean if true print admin content, if false print customer content
+     * @throws SQLException in case an SQL exception is occurred
+     * @return motherboard table
+     */
     public static String createMotherboard(Boolean f) throws SQLException
     {
         String output;
@@ -93,6 +100,14 @@ public class HTMLTableCreator {
         return output;
     }
 
+    /**
+     * Create cpu table contaning either filtered or unfiltered data
+     * @param f if true print admin content, if false print customer content
+     * @param status status of constraint, if true filter the table based on compatibility otherwise print all CPUs
+     * @param brand brand of cpu component
+     * @param model model of cpu component
+     * @return the cpu table
+     */
     public static String createCPU(Boolean f, Boolean status, String brand, String model)
     {
         String output;
@@ -181,6 +196,15 @@ public class HTMLTableCreator {
         return output;
     }
     
+        
+    /**
+     * Create ram table compatible with the motherboard component
+     * @param f boolean if true print admin content, if false print customer content
+     * @param status status of constraint, if true filter the table based on compatibility otherwise print all RAMs
+     * @param brand the brand of ram component
+     * @param model the model of ram component
+     * @return the ram table
+     */
     public static String createRAM(Boolean f, Boolean status, String brand, String model)
     {
         String output;
@@ -279,6 +303,11 @@ public class HTMLTableCreator {
     }
     
     
+    /**
+     * Create Graphics Card table
+     * @param f boolean if true print admin content, if false print customer content
+     * @return the Graphics Card table
+     */
     public static String createGCard(Boolean f)
     {
         String output;
@@ -358,8 +387,11 @@ public class HTMLTableCreator {
         
         return output;
     }
-    
-    
+    /**
+     * Create the Hard Drive table
+     * @param f boolean if true print admin content, if false print customer content
+     * @return the Hard Drive table
+     */
     public static String createHDrive(Boolean f)
     {
         String output;
@@ -437,6 +469,11 @@ public class HTMLTableCreator {
         return output;
     }
     
+    /**
+     * Create Power Supply table
+     * @param f boolean if true print admin content, if false print customer content
+     * @return the Power Supply table
+     */
     public static String createPS(Boolean f)
     {
         String output;
@@ -511,7 +548,11 @@ public class HTMLTableCreator {
         return output;
     }
     
-    
+    /**
+     * Create case table
+     * @param f boolean if true print admin content, if false print customer content
+     * @return the case table
+     */
     public static String createCase(Boolean f)
     {
         String output;
@@ -582,7 +623,4 @@ public class HTMLTableCreator {
         
         return output;
     }
-
-    
-
 }

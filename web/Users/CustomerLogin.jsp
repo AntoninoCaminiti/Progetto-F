@@ -14,6 +14,6 @@
         session.setAttribute("userid", userid);
         response.sendRedirect(request.getParameter("uref"));
     } else {
-        out.println("Invalid password <a href='Login.html'>try again</a>");
+        response.sendRedirect(request.getParameter("uref"));
     }
 %>

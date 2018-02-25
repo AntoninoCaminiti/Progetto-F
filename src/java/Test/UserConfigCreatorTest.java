@@ -7,7 +7,7 @@ import java.sql.SQLException;
  *
  * @author James Abbate
  */
-public class testUserConfigCreator {
+public class UserConfigCreatorTest {
     public static void main(String[] args) {
         
         try{

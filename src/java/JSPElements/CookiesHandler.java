@@ -5,7 +5,6 @@
  */
 package JSPElements;
 
-import javax.jms.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CookiesHandler {
     
-    
 
-    
+    /**
+     * Get the value of cookie given its name
+     * @param name the name of the cookie
+     * @param request the current instance of the HttpServleRequest in jsp system
+     * @return the value of cookie
+     */
     public String getCookie(String name, HttpServletRequest request)
     {
         Cookie[] cookies = request.getCookies();
@@ -31,6 +34,12 @@ public class CookiesHandler {
         return value;
     }
     
+    /**
+     * Check if name of cookie exist
+     * @param name the name of cookie
+     * @param request the obbject HttpServlet
+     * @return boolean true if the name exist else return false
+     */
     public Boolean isValidCookie(String name, HttpServletRequest request)
     {
         Boolean state = false;

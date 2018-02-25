@@ -1,6 +1,10 @@
 package Components;
 import java.util.ArrayList;
 
+/**
+ * This class take all data of ram from database and insert they in ArrayLists
+ * @author Utente
+ */
 public class RAMLoader {
     
     private ArrayList<Integer> cods = new ArrayList<>();
@@ -15,7 +19,19 @@ public class RAMLoader {
     private ArrayList<Double> prices = new ArrayList<>();
     private int noe;
     
-    
+    /**
+     * Insert all data of ram into ArrayLists
+     * @param cod the code of ram component
+     * @param brand the brand of ram component
+     * @param model the model of ram component
+     * @param type the type of ram component
+     * @param speed the speed of ram component
+     * @param tdp the consumptionpower of ram component
+     * @param nom the number of modular of ram component
+     * @param som the size of modular of ram component
+     * @param size the size of ram component
+     * @param price the price of ram component
+     */
     public void fillLoader(int cod, String brand, String model, String type, String speed, int tdp, int nom, int som, int size, Double price)
     {
         cods.add(cod);
@@ -31,6 +47,9 @@ public class RAMLoader {
         noe++;
     }
     
+    /**
+     * Clear all ArrayLists
+     */
     public void cleanAll()
     {
         cods.clear();
@@ -46,60 +65,107 @@ public class RAMLoader {
         noe = 0;
     }
     
+    /**
+     * Get all codes of ram table
+     * @return all codes of ram components
+     */
     public ArrayList<Integer> listCods()
     {
         return cods;
     }
     
+    /**
+     * Get all brands of ram table
+     * @return all brands of ram components
+     */
     public ArrayList<String> listBrands()
     {
         return brands;
     }
     
+    /**
+     * Get all models of ram table
+     * @return all models of ram components
+     */
     public ArrayList<String> listModels()
     {
         return models;
     }
     
+     /**
+     * Get all types of ram table
+     * @return all tupes of ram components
+     */
     public ArrayList<String> listTypes()
     {
         return types;
     }
     
+    /**
+     * Get all speeds of ram table
+     * @return all speeds of ram components
+     */
     public ArrayList<String> listSpeeds()
     {
         return speeds;
     }
-    
+     /**
+     * Get all tdps of ram table
+     * @return all tdps of ram components
+     */
     public ArrayList<Integer> listTDPs()
     {
         return tdps;
     }
     
+    /**
+     * Get all NOMs of ram table
+     * @return all NOMs of ram components
+     */
     public ArrayList<Integer> listNOMs()
     {
         return noms;
     }
     
+    /**
+     * Get all SOMs of ram table 
+     * @return all SOMs of ram components
+     */
     public ArrayList<Integer> listSOMs()
     {
         return soms;
     }
     
+    /**
+     * Get all sizes of ram table
+     * @return all size of ram components
+     */
     public ArrayList<Integer> listSizes()
     {
         return sizes;
     }
     
+    /**
+     * Get all prices of ram table
+     * @return all prices of ram components
+     */
     public ArrayList<Double> listPrices()
     {
         return prices;
     }
-     public int getSize()
+    
+    /**
+     * Get the numer of element
+     * @return the number of row
+     */
+    public int getSize()
     {
         return noe;
     }
     
+    /**
+     * Print all data of all ram components
+     */
     public void printAll()
     {
         System.out.println(noe);

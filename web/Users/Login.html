@@ -12,16 +12,16 @@
             <form class="login-form" method="post" action="CustomerLogin.jsp">
                 <h1>Login</h1>
                 <input type="hidden" name="uref" id="uref"/>
-                <input type="text" name="uname" id="uname" placeholder="Username..."/>
-                <input type="password" name="pass" id="pass" placeholder="Password..."/>
+                <input type="text" name="uname" id="uname" required placeholder="Username..."/>
+                <input type="password" name="pass" id="pass" required placeholder="Password..."/>
                 <button>Sign In</button>
                 <p class="message">Not registered?! <a href="RegistrationForm.html">Create an account!</a></p>
                 <p class="message"><a href="../index.html">Go back home! <img src="./../CSStyles/home.png" alt="Go back home!" width="16" height="16"></a></p>
             </form>
           </div>
         </div>
+        <script>
+            document.getElementById("uref").value = document.referrer;
+        </script>
     </body>
 </html>
-<script>
-    document.getElementById("uref").value = document.referrer;
-</script>

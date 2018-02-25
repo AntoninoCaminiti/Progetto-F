@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author James Abbate
  */
-public class testComponentParser {
+public class ComponentParserTest {
     public static void main(String[] args) {
         try{
         //GetComponent Method - Print Brand and Model of a component
