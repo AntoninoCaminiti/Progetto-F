@@ -1,20 +1,35 @@
 package JSPElements;
-import Components.CPULoader;
-import Components.CaseLoader;
-import Components.GCardLoader;
-import Components.HDriveLoader;
-import Components.MBLoader;
-import Components.PSLoader;
-import Components.RAMLoader;
+import Components.CPU;
+import Components.PCCase;
+import Components.GraphicsCard;
+import Components.MemoryDrive;
+import Components.Motherboard;
+import Components.PowerSupply;
+import Components.RAM;
+import Components.TDPConstraint;
+import Components.UserCart;
 import DatabaseElements.DBComponentController;
 import DatabaseElements.DBFilters;
-import DatabaseElements.DatabaseInit;
 import Exceptions.ComponentLoadingException;
 import Exceptions.NoCPUMatchedException;
 import Exceptions.NoRAMMatchedException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class HTMLTableCreator {
+    
+    private static UserCart uc = null;
+    
+    
+    public HTMLTableCreator()
+    {
+        
+    }
+    
+    public HTMLTableCreator(UserCart uc)
+    {
+        this.uc = uc;
+    }
     
      /**
      * Create motherboard table containing data
@@ -28,7 +43,7 @@ public class HTMLTableCreator {
         StringBuilder ss = new StringBuilder();
         try{
             DBComponentController db = new DBComponentController();
-            MBLoader mb = db.loadMB();
+            ArrayList <Motherboard> motherboardArr = db.loadMB();
 
             ss.append("<table id=\"table1\" class=\"tableSection\">");
             ss.append("<thead>");
@@ -51,19 +66,19 @@ public class HTMLTableCreator {
             ss.append("</thead>");
             ss.append("<tbody>");
         
-            for(int i = 0; i < mb.getMBSize(); i++)
+            for(int i = 0; i < motherboardArr.size(); i++)
             {
-                int cod = mb.listCods().get(i);
-                String str1 = mb.listBrands().get(i);
-                String str2 = mb.listModels().get(i);
-                String str3 = mb.listSockets().get(i);
-                String str4 = mb.listFormfactors().get(i);
-                String str5 = mb.listChipsets().get(i);
-                Integer int1 = mb.listramslots().get(i);
-                String str6 = mb.listRamTypes().get(i);
-                Integer int2 = mb.listmaxrams().get(i);
-                Integer int3 = mb.listTDPs().get(i);
-                Double dub1 = mb.listPrices().get(i);
+                int cod = motherboardArr.get(i).getCod();
+                String str1 = motherboardArr.get(i).getBrand();
+                String str2 = motherboardArr.get(i).getModel();
+                String str3 = motherboardArr.get(i).getSocket();
+                String str4 = motherboardArr.get(i).getFormfactor();
+                String str5 = motherboardArr.get(i).getChipset();
+                Integer int1 = motherboardArr.get(i).getRamSlot();
+                String str6 = motherboardArr.get(i).getRamType();
+                Integer int2 = motherboardArr.get(i).getMaxRamSupported();
+                Integer int3 = motherboardArr.get(i).getTdp();
+                Double dub1 = motherboardArr.get(i).getPrice();
 
                 ss.append("<tr>");
 
@@ -89,7 +104,6 @@ public class HTMLTableCreator {
             ss.append("</table>");
             ss.append(TableSorter.sortTable("table1"));
             ss.append(TableSorter.sortTablePrice("table1"));
-            db.closeall();
         }
         catch(ComponentLoadingException cle)
         {
@@ -117,16 +131,16 @@ public class HTMLTableCreator {
             //per avere qualcosa del tipo new DBCetc().loadetc(); chiudo la connessione in ogni metodo load
             DBComponentController dbc = new DBComponentController();
             DBFilters db = new DBFilters();
-            CPULoader cpu = new CPULoader();
-
+            ArrayList <CPU> cpupc = new ArrayList<>();
+            
             //se f è vera, allora siamo nel lato Admin e non c'è necessità di compatibilità
-            if(f == true) cpu = dbc.loadCPU();
+            if(f == true) cpupc = dbc.loadCPU();
             //se f è falsa, allora siamo nel caso Customer
             //e in base al vincolo o meno status sarà true o false
             if(f == false)
             {
-                if(status == true) cpu = db.filterCPU(brand,model);
-                if(status == false) cpu = dbc.loadCPU();
+                if(status == true) cpupc = db.filterCPU(brand,model);
+                if(status == false) cpupc = dbc.loadCPU();
             }
 
 
@@ -148,16 +162,16 @@ public class HTMLTableCreator {
             ss.append("</thead>");
             ss.append("<tbody>");
 
-            for(int i = 0; i < cpu.getSize(); i++)
+            for(int i = 0; i < cpupc.size(); i++)
             {
-                int cod = cpu.listCods().get(i);
-                String str1 = cpu.listBrands().get(i);
-                String str2 = cpu.listModels().get(i);
-                String str3 = cpu.listSockets().get(i);
-                Double db1 = cpu.listFrequencies().get(i);
-                Integer int1 = cpu.listCores().get(i);
-                Integer int2 = cpu.listTDPs().get(i);
-                Double db2 = cpu.listPrices().get(i);
+                int cod = cpupc.get(i).getCod();
+                String str1 = cpupc.get(i).getBrand();
+                String str2 = cpupc.get(i).getModel();
+                String str3 = cpupc.get(i).getSocket();
+                Double db1 = cpupc.get(i).getClockSpeed();
+                Integer int1 = cpupc.get(i).getCore();
+                Integer int2 = cpupc.get(i).getTdp();
+                Double db2 = cpupc.get(i).getPrice();
 
                 ss.append("<tr>");
                 ss.append("<td>"+str1+"</td>");
@@ -173,7 +187,96 @@ public class HTMLTableCreator {
                 ss.append(">"+cod+"</td>");
                 ss.append("</tr>");
                  }
-                db.closeall();
+        }
+        catch(ComponentLoadingException cle)
+        {
+            ss.append(cle.getMessage());
+        }
+        catch(NoCPUMatchedException nce)
+        {
+            ss.append(nce.getMessage());
+            
+        }
+        catch(SQLException ex){
+            ss.append(ex.getMessage());
+        }	
+        ss.append("</tbody>");
+        ss.append("</table>");
+        ss.append(TableSorter.sortTable("table2"));
+        ss.append(TableSorter.sortTablePrice("table2"));
+        output = ss.toString();
+                                   
+        return output;
+    }
+    
+    public static String createCPU(Boolean f, Boolean status, int prevcod)
+    {
+        String output;
+        StringBuilder ss = new StringBuilder();
+        
+        ComponentParser cp = new ComponentParser();
+        
+        
+        try{                           
+            //per avere qualcosa del tipo new DBCetc().loadetc(); chiudo la connessione in ogni metodo load
+            DBComponentController dbc = new DBComponentController();
+            DBFilters db = new DBFilters();
+            ArrayList <CPU> cpupc = new ArrayList<>();
+            uc.setMotherboard((Motherboard) cp.getComponent(prevcod));
+            //se f è vera, allora siamo nel lato Admin e non c'è necessità di compatibilità
+            if(f == true) cpupc = dbc.loadCPU();
+            //se f è falsa, allora siamo nel caso Customer
+            //e in base al vincolo o meno status sarà true o false
+            if(f == false)
+            {
+                if(status == true) cpupc = db.filterCPU(String.valueOf(prevcod));
+                if(status == false) cpupc = dbc.loadCPU();
+            }
+
+
+            ss.append("<table id=\"table2\" class=\"tableSection\">");
+            ss.append("<thead>");
+            ss.append("<tr>");
+            ss.append("<th onclick=\"sortTable(0)\">Brand</th>");
+            ss.append("<th onclick=\"sortTable(1)\">Model</th>");
+            ss.append("<th>Socket</th>");
+            ss.append("<th onclick=\"sortTable(3)\">Frequency</th>");
+            ss.append("<th onclick=\"sortTable(4)\">Cores</th>");
+            ss.append("<th>TDP</th>");
+            ss.append("<th onclick=\"sortNumber(6)\">Price</th>");
+            if(f==true) ss.append("<th>Delete</th>");
+            ss.append("<th");
+            if(f == false) ss.append(" style=\"display:none;\"");
+            ss.append(">COD</th>");
+            ss.append("</tr>");
+            ss.append("</thead>");
+            ss.append("<tbody>");
+
+            for(int i = 0; i < cpupc.size(); i++)
+            {
+                int cod = cpupc.get(i).getCod();
+                String str1 = cpupc.get(i).getBrand();
+                String str2 = cpupc.get(i).getModel();
+                String str3 = cpupc.get(i).getSocket();
+                Double db1 = cpupc.get(i).getClockSpeed();
+                Integer int1 = cpupc.get(i).getCore();
+                Integer int2 = cpupc.get(i).getTdp();
+                Double db2 = cpupc.get(i).getPrice();
+
+                ss.append("<tr>");
+                ss.append("<td>"+str1+"</td>");
+                ss.append("<td>"+str2+"</td>");
+                ss.append("<td>"+str3+"</td>");
+                ss.append("<td>"+db1+"</td>");
+                ss.append("<td>"+int1+"</td>");
+                ss.append("<td>"+int2+"</td>");
+                ss.append("<td>"+db2+"</td>");
+                if(f == true) ss.append("<td> <form action=\"../DeletePage/DeleteCpu.jsp\" method=\"post\"><input type=\"hidden\" value=\" " + cod + " \" name = \"deletecod\"> <input type=\"submit\" value=\"Remove\"> </form action> </td>");
+                ss.append("<td");
+                if(f == false) ss.append(" style=\"display:none;\"");
+                ss.append(">"+cod+"</td>");
+                ss.append("</tr>");
+                 }
         }
         catch(ComponentLoadingException cle)
         {
@@ -205,7 +308,7 @@ public class HTMLTableCreator {
      * @param model the model of ram component
      * @return the ram table
      */
-    public static String createRAM(Boolean f, Boolean status, String brand, String model)
+    public static String createRAM(Boolean f, Boolean status, int filCod,int prevcod)
     {
         String output;
         StringBuilder ss = new StringBuilder();
@@ -213,17 +316,19 @@ public class HTMLTableCreator {
         try{     
             DBComponentController dbc = new DBComponentController();
             DBFilters db = new DBFilters();
-            RAMLoader ram = new RAMLoader();
+            ArrayList <RAM> ramar = new ArrayList<>();
+            ComponentParser cp = new ComponentParser();
 
-
+            uc.setCpupc((CPU) cp.getComponent(prevcod));
+            
             //se f è vera, allora siamo nel lato Admin e non c'è necessità di compatibilità
-            if(f == true) ram = dbc.loadRAM();
+            if(f == true) ramar = dbc.loadRAM();
             //se f è falsa, allora siamo nel caso Customer
             //e in base al vincolo o meno status sarà true o false
             if(f == false)
             {
-                if(status == true) ram = db.filterRAM(brand,model);
-                if(status == false) ram = dbc.loadRAM();
+                if(status == true) ramar = db.filterRAM(String.valueOf(filCod));
+                if(status == false) ramar = dbc.loadRAM();
             }
 
 
@@ -248,19 +353,18 @@ public class HTMLTableCreator {
             ss.append("<tbody>");
 
 
-            for(int i = 0; i < ram.getSize(); i++)
+            for(int i = 0; i < ramar.size(); i++)
             {
-                int cod = ram.listCods().get(i);
-
-                String str1 = ram.listBrands().get(i);
-                String str2 = ram.listModels().get(i);
-                String str3 = ram.listTypes().get(i);
-                String str4 = ram.listSpeeds().get(i);
-                Integer int1 = ram.listTDPs().get(i);
-                Integer int2 = ram.listNOMs().get(i);
-                Integer int3 = ram.listSOMs().get(i);
-                Integer int4 = ram.listSizes().get(i);
-                Double db1 = ram.listPrices().get(i);
+                int cod = ramar.get(i).getCod();
+                String str1 = ramar.get(i).getBrand();
+                String str2 = ramar.get(i).getModel();
+                String str3 = ramar.get(i).getType();
+                String str4 = ramar.get(i).getClockSpeed();
+                Integer int1 = ramar.get(i).getTdp();
+                Integer int2 = ramar.get(i).getNumberOfModules();
+                Integer int3 = ramar.get(i).getSizeOfModules();
+                Integer int4 = ramar.get(i).getTotalSize();
+                Double db1 = ramar.get(i).getPrice();
 
                 ss.append("<tr>");
                 ss.append("<td>"+str1+"</td>");
@@ -280,7 +384,6 @@ public class HTMLTableCreator {
 
             }
 
-            db.closeall();
         }
         catch(ComponentLoadingException cle)
         {
@@ -308,18 +411,17 @@ public class HTMLTableCreator {
      * @param f boolean if true print admin content, if false print customer content
      * @return the Graphics Card table
      */
-    public static String createGCard(Boolean f)
+    public static String createGCard(Boolean f, int prevcod)
     {
         String output;
         StringBuilder ss = new StringBuilder();
+        ComponentParser cp = new ComponentParser();
         
         try{
         
             DBComponentController dbc = new DBComponentController();
-            GCardLoader gc = new GCardLoader();
-
-            gc = dbc.loadGCard();
-
+            ArrayList <GraphicsCard> graphics = dbc.loadGCard();
+            uc.setMemoryram((RAM) cp.getComponent(prevcod));
             ss.append("<table id=\"table4\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
@@ -340,18 +442,18 @@ public class HTMLTableCreator {
             ss.append("</thead>");
             ss.append("<tbody>");
 
-            for(int i = 0; i < gc.getSize(); i++)
+            for(int i = 0; i < graphics.size(); i++)
             {
-                int cod = gc.listCods().get(i);
-                String str1 = gc.listBrands().get(i);
-                String str2 = gc.listModels().get(i);
-                String str3 = gc.listSeries().get(i);
-                String str4 = gc.listChipsets().get(i);
-                Integer int1 = gc.listMemory().get(i);
-                Double db1 = gc.listClocks().get(i);
-                Integer int2 = gc.listTDPs().get(i);
-                Integer int3 = gc.listLength().get(i);
-                Double db2 = gc.listPrices().get(i);
+                int cod = graphics.get(i).getCod();
+                String str1 = graphics.get(i).getBrand();
+                String str2 = graphics.get(i).getModel();
+                String str3 = graphics.get(i).getSerie();
+                String str4 = graphics.get(i).getChipset();
+                Integer int1 = graphics.get(i).getMemory();
+                Double db1 = graphics.get(i).getClockSpeed();
+                Integer int2 = graphics.get(i).getTdp();
+                Integer int3 = graphics.get(i).getWidth();
+                Double db2 = graphics.get(i).getPrice();
                 ss.append("<tr>");
                 ss.append("<td>"+str1+"</td>");
                 ss.append("<td>"+str2+"</td>");
@@ -373,7 +475,6 @@ public class HTMLTableCreator {
             ss.append("</table>");
             ss.append(TableSorter.sortTable("table4"));
             ss.append(TableSorter.sortTablePrice("table4"));
-            dbc.closeall();
         }
         catch(ComponentLoadingException cle)
         {
@@ -392,16 +493,16 @@ public class HTMLTableCreator {
      * @param f boolean if true print admin content, if false print customer content
      * @return the Hard Drive table
      */
-    public static String createHDrive(Boolean f)
+    public static String createHDrive(Boolean f, int prevcod)
     {
         String output;
         StringBuilder ss = new StringBuilder();
-        
+        ComponentParser cp = new ComponentParser();
         try{
             
             DBComponentController db = new DBComponentController();
-            HDriveLoader hd = db.loadHDrive();
-
+            ArrayList <MemoryDrive> memDrive = db.loadMDrive();
+            uc.setGraphics((GraphicsCard) cp.getComponent(prevcod));
             ss.append("<table id=\"table5\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
@@ -422,18 +523,18 @@ public class HTMLTableCreator {
             ss.append("</thead>");
             ss.append("<tbody>");
 
-            for(int i = 0; i < hd.getSize(); i++)
+            for(int i = 0; i < memDrive.size(); i++)
             {
-                int cod = hd.listCods().get(i);
-                String str1 = hd.listBrands().get(i);
-                String str2 = hd.listModels().get(i);
-                String str3 = hd.listSeries().get(i);
-                String str4 = hd.listForms().get(i);
-                String str5 = hd.listTypes().get(i);				
-                Integer int1 = hd.listSizes().get(i);
-                Integer int2 = hd.listTDPs().get(i);
-                Integer int3 = hd.listCaches().get(i); 
-                Double db1 = hd.listPrices().get(i);
+                int cod = memDrive.get(i).getCod();
+                String str1 = memDrive.get(i).getBrand();
+                String str2 = memDrive.get(i).getModel();
+                String str3 = memDrive.get(i).getSerie();
+                String str4 = memDrive.get(i).getForm();
+                String str5 = memDrive.get(i).getType();
+                Integer int1 = memDrive.get(i).getSize();
+                Integer int2 = memDrive.get(i).getTdp();
+                Integer int3 = memDrive.get(i).getCache();
+                Double db1 = memDrive.get(i).getPrice();
                 ss.append("<tr>");
                 ss.append("<td>"+str1+"</td>");
                 ss.append("<td>"+str2+"</td>");
@@ -454,7 +555,6 @@ public class HTMLTableCreator {
             ss.append("</table>");
             ss.append(TableSorter.sortTable("table5"));
             ss.append(TableSorter.sortTablePrice("table5"));
-            db.closeall();
         }
         catch(ComponentLoadingException cle)
         {
@@ -474,15 +574,18 @@ public class HTMLTableCreator {
      * @param f boolean if true print admin content, if false print customer content
      * @return the Power Supply table
      */
-    public static String createPS(Boolean f)
+    public static String createPS(Boolean f, int prevcod)
     {
         String output;
         StringBuilder ss = new StringBuilder();
-        
+        ComponentParser cp = new ComponentParser();
         try{
             DBComponentController db = new DBComponentController();
-            PSLoader ps = db.loadPS();
-
+            ArrayList <PowerSupply> power_supp = db.loadPS();
+            TDPConstraint cs = new TDPConstraint();
+            
+            uc.setMemdrive((MemoryDrive) cp.getComponent(prevcod));
+            int threshold = uc.getTotalTDP();
             ss.append("<table id=\"table6\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
@@ -502,36 +605,40 @@ public class HTMLTableCreator {
             ss.append("</thead>");
             ss.append("<tbody>");
 
-            for(int i = 0; i < ps.getSize(); i++)
+            for(int i = 0; i < power_supp.size(); i++)
             {
-                int cod = ps.listCods().get(i);
-                String str1 = ps.listBrands().get(i);
-                String str2 = ps.listModels().get(i);
-                String str3 = ps.listSeries().get(i);
-                String str4 = ps.listForms().get(i);
-                String str5 = ps.listEfficiencies().get(i);
-                Integer int1 = ps.listMaxTDPs().get(i);
-                String str6 = ps.listModulars().get(i);
-                Double db1 = ps.listPrices().get(i);
-
-                ss.append("<tr>");
-                ss.append("<td>"+str1+"</td>");
-                ss.append("<td>"+str2+"</td>");
-                ss.append("<td>"+str3+"</td>");
-                ss.append("<td>"+str4+"</td>");
-                ss.append("<td>"+str5+"</td>");
-                ss.append("<td>"+int1+"</td>");
-                ss.append("<td>"+str6+"</td>");
-                ss.append("<td>"+db1+"</td>");
-                if(f == true) ss.append("<td> <form action=\"../DeletePage/DeletePS.jsp\" method=\"post\"> <input type=\"hidden\" value=\" " + cod + " \" name = \"deletecod\"> <input type=\"submit\" value=\"Remove\"> </form action> </td>");
-                ss.append("<td");
-                if(f == false) ss.append(" style=\"display:none;\"");
-                ss.append(">"+cod+"</td>");
-                ss.append("</tr>");
+                int cod = power_supp.get(i).getCod();
+                String str1 = power_supp.get(i).getBrand();
+                String str2 = power_supp.get(i).getModel();
+                String str3 = power_supp.get(i).getSerie();
+                String str4 = power_supp.get(i).getForm();
+                String str5 = power_supp.get(i).getEfficiency();
+                Integer int1 = power_supp.get(i).getMaxTDPSupported();
+                String str6 = power_supp.get(i).getModular();
+                Double db1 = power_supp.get(i).getPrice();
+                
+                uc.setPowersupp((PowerSupply) cp.getComponent(cod));
+                
+                if(cs.isCompatible(uc))
+                {
+                    ss.append("<tr>");
+                    ss.append("<td>"+str1+"</td>");
+                    ss.append("<td>"+str2+"</td>");
+                    ss.append("<td>"+str3+"</td>");
+                    ss.append("<td>"+str4+"</td>");
+                    ss.append("<td>"+str5+"</td>");
+                    ss.append("<td>"+int1+"</td>");
+                    ss.append("<td>"+str6+"</td>");
+                    ss.append("<td>"+db1+"</td>");
+                    if(f == true) ss.append("<td> <form action=\"../DeletePage/DeletePS.jsp\" method=\"post\"> <input type=\"hidden\" value=\" " + cod + " \" name = \"deletecod\"> <input type=\"submit\" value=\"Remove\"> </form action> </td>");
+                    ss.append("<td");
+                    if(f == false) ss.append(" style=\"display:none;\"");
+                    ss.append(">"+cod+"</td>");
+                    ss.append("</tr>");
+                }
             }		
             ss.append("</tbody>");
             ss.append("</table>");
-            db.closeall();
         }
         catch(ComponentLoadingException cle)
         {
@@ -553,15 +660,17 @@ public class HTMLTableCreator {
      * @param f boolean if true print admin content, if false print customer content
      * @return the case table
      */
-    public static String createCase(Boolean f)
+    public static String createCase(Boolean f, int prevcod)
     {
         String output;
         StringBuilder ss = new StringBuilder();
+        ComponentParser cp = new ComponentParser();
         
         try{
             DBComponentController db = new DBComponentController();
-            CaseLoader ca = db.loadCase();
-
+            ArrayList <PCCase> caseesac = db.loadCase();
+            uc.setPowersupp((PowerSupply) cp.getComponent(prevcod));
+            
             ss.append("<table id=\"table7\" class=\"tableSection\">");
             ss.append("<thead>");
             ss.append("<tr>");
@@ -580,16 +689,16 @@ public class HTMLTableCreator {
             ss.append("</thead>");
             ss.append("<tbody>");
 
-            for(int i = 0; i < ca.getSize(); i++)
+            for(int i = 0; i < caseesac.size(); i++)
             {
-                int cod = ca.listCods().get(i);
-                String str1 = ca.listBrands().get(i);
-                String str2 = ca.listModels().get(i);
-                String str3 = ca.listTypes().get(i);
-                String str4 = ca.listColors().get(i);
-                String str5 = ca.listMB_Comp().get(i);
-                Double db1 = ca.listMax_hd_Len().get(i);
-                Double db2 = ca.listPrices().get(i);
+                int cod = caseesac.get(i).getCod();
+                String str1 = caseesac.get(i).getBrand();
+                String str2 = caseesac.get(i).getModel();
+                String str3 = caseesac.get(i).getType();
+                String str4 = caseesac.get(i).getColor();
+                String str5 = caseesac.get(i).getCompatibleMBs();
+                Double db1 = caseesac.get(i).getHdLengthSupported();
+                Double db2 = caseesac.get(i).getPrice();
 
                 ss.append("<tr>");
                 ss.append("<td>"+str1+"</td>");
@@ -609,7 +718,6 @@ public class HTMLTableCreator {
             ss.append("</table>");
             ss.append(TableSorter.sortTable("table7"));
             ss.append(TableSorter.sortTablePrice("table7"));
-            db.closeall();
         }
         catch(ComponentLoadingException cle)
         {
@@ -623,4 +731,5 @@ public class HTMLTableCreator {
         
         return output;
     }
+
 }

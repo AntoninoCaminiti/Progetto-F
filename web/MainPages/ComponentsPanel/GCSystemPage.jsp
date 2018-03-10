@@ -3,6 +3,8 @@
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+
+<jsp:useBean id="userc" scope="session" class="Components.UserCart"/>
 <%
     
     String mbcod = null;
@@ -17,20 +19,20 @@
         mbcod = new CookiesHandler().getCookie("MBCOD", request);
        
     }
-    mbField = new ComponentParser().getComponent("MOTHERBOARD", mbcod).replace("-CC-", " ");
+            
+    mbField = new ComponentParser().getComponent(Integer.parseInt(mbcod)).getBrand()+"-CC-"+new ComponentParser().getComponent(Integer.parseInt(mbcod)).getBrand();
     String cpucod = null;
     
     if(cpucod!=null)
     {
-        cpucod = new ComponentParser().getComponent("CPU", cpucod);
+        cpucod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(cpucod)).getCod());
     }
     if(request.getSession().getAttribute("cpuCod")==null)
     {
         cpucod = new CookiesHandler().getCookie("CPUCOD", request);
-       
     }
     
-    String cpuField = new ComponentParser().getComponent("CPU", cpucod).replace("-CC-", " ");
+    String cpuField = new ComponentParser().getComponent(Integer.parseInt(cpucod)).getBrand()+" "+new ComponentParser().getComponent(Integer.parseInt(cpucod)).getModel();
     
     
     String ramcod = null;
@@ -41,7 +43,7 @@
     String ramField = null;
     if(request.getSession().getAttribute("ramCod")!=null)
     {
-        ramcod = new ComponentParser().getComponent("RAM", ramcod);
+        ramcod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(ramcod)).getCod());
     }
     if(request.getSession().getAttribute("ramCod")==null)
     {
@@ -49,7 +51,7 @@
        
     }
     
-    ramField = new ComponentParser().getComponent("RAM", ramcod).replace("-CC-", " ");
+    ramField = new ComponentParser().getComponent(Integer.parseInt(ramcod)).getBrand() + " " +new ComponentParser().getComponent(Integer.parseInt(ramcod)).getModel();
     
 
     Double price = null;
@@ -111,7 +113,7 @@
             </ul>
             <!-- Loading GCard components in a table-->
             <%
-                out.println(new HTMLTableCreator().createGCard(false));
+                out.println(new HTMLTableCreator(userc).createGCard(false, Integer.parseInt(ramcod)));
             %>
             <script>
                 var gcIndex;

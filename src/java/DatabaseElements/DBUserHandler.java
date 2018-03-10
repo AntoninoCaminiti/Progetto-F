@@ -5,11 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBUserHandler extends DBConnection {
+public class DBUserHandler {
     
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet res = null;
+    private Connection conn = null;
+    private Statement stmt = null;
+    private ResultSet res = null;
     
     /**
      * Sets the variables conn, mystmt, res to null for the connection.
@@ -20,7 +20,9 @@ public class DBUserHandler extends DBConnection {
      */
     public DBUserHandler() throws SQLException
     {
-        stmt = this.Connect();
+        DBConnection connection = new DBConnection();
+        conn = connection.Connect();
+        stmt = conn.createStatement();
     }
     
     /**
@@ -40,6 +42,8 @@ public class DBUserHandler extends DBConnection {
         {
             stmt.executeUpdate("insert into CustomerLogin (USERNAME, PASS, EMAIL, ADDRESS) values ('" + uname + "','" + pwd + "','" + email + "','" + addr +"')");
             System.out.println("Utente " + uname + " creato");
+            conn.close();
+            stmt.close();
             st = true;
         }
         else
@@ -65,6 +69,8 @@ public class DBUserHandler extends DBConnection {
         {
             stmt.executeUpdate("insert into ADMINLOGIN (USERNAME, PASS) values ('" + uAdmin + "','" + pAdmin + "')");
             System.out.println("Amministratore " + uAdmin + " creato");
+            conn.close();
+            stmt.close();
             st = true;
         }
         else
@@ -92,7 +98,9 @@ public class DBUserHandler extends DBConnection {
                 st = true;
             }
         }
-        
+        conn.close();
+        stmt.close();
+        res.close();
         return st;
     }
     
@@ -124,12 +132,15 @@ public class DBUserHandler extends DBConnection {
     public Boolean getCPUStatusConstr() throws SQLException
     {
         Boolean status = true;
-        res = mystmt.executeQuery("select CPUFLAG from ADMINCONTROLS");
+        res = stmt.executeQuery("select CPUFLAG from ADMINCONTROLS");
         while(res.next())
         {
             if(res.getInt(1)==1) status = true;
             if(res.getInt(1)==0) status = false;   
         }
+        conn.close();
+        stmt.close();
+        res.close();
         return status;
     }
     
@@ -142,12 +153,15 @@ public class DBUserHandler extends DBConnection {
     {
             if(status == false)
             {
-                mystmt.executeUpdate("update ADMINCONTROLS set CPUFLAG = 0");
+                stmt.executeUpdate("update ADMINCONTROLS set CPUFLAG = 0");
             }
             if(status == true)
             {
-                mystmt.executeUpdate("update ADMINCONTROLS set CPUFLAG = 1");
+                stmt.executeUpdate("update ADMINCONTROLS set CPUFLAG = 1");
             }
+        conn.close();
+        stmt.close();
+        res.close();
     }
     
     /**
@@ -158,13 +172,15 @@ public class DBUserHandler extends DBConnection {
     public Boolean getRAMStatusConstr() throws SQLException
     {
         Boolean status = true;
-        res = mystmt.executeQuery("select RAMFLAG from ADMINCONTROLS");
+        res = stmt.executeQuery("select RAMFLAG from ADMINCONTROLS");
         while(res.next())
         {
             if(res.getInt(1)==1) status = true;
             if(res.getInt(1)==0) status = false;   
         }
-        
+        conn.close();
+        stmt.close();
+        res.close();
         return status;
     }    
     
@@ -177,11 +193,14 @@ public class DBUserHandler extends DBConnection {
     {
             if(status == false)
             {
-                mystmt.executeUpdate("update ADMINCONTROLS set RAMFLAG = 0");
+                stmt.executeUpdate("update ADMINCONTROLS set RAMFLAG = 0");
             }
             if(status == true)
             {
-                mystmt.executeUpdate("update ADMINCONTROLS set RAMFLAG = 1");
+                stmt.executeUpdate("update ADMINCONTROLS set RAMFLAG = 1");
             }
+            conn.close();
+            stmt.close();
+            res.close();
     }
 }

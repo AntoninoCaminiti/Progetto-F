@@ -4,7 +4,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="DatabaseElements.DatabaseInit" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-
+<jsp:useBean id="userc" scope="session" class="Components.UserCart"/>
 
 <%
     String mbcod = null;
@@ -16,7 +16,7 @@
     }
     String mbField = null;
     if(mbcod != null){
-    mbField = new ComponentParser().getComponent("MOTHERBOARD", mbcod);                                
+    //mbField = new ComponentParser().getComponent(mbcod);                                
     }
 %>
 
@@ -73,7 +73,7 @@
                 <%
                     
                     try{
-                    out.println(new HTMLTableCreator().createMotherboard(false));
+                    out.println(new HTMLTableCreator(userc).createMotherboard(false));
                     }
                     catch(NullPointerException npe)
                     {
@@ -101,7 +101,7 @@
                     {
                         tableMB.rows[a].onclick = function()
                         {
-                             
+
                             //Remove the previous selected row
                             if (typeof mbIndex !== "undefined")
                             {

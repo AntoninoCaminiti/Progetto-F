@@ -7,7 +7,6 @@
 <%
     /*Inserimento dei dati nella purchase*/
     /*Tramite Session*/
-    ConfigurationSave confSave = (ConfigurationSave) session.getAttribute("confSave");
     String mbcod = (String) request.getSession().getAttribute("mbCod");
     String cpucod = (String) request.getSession().getAttribute("cpuCod");
     String ramcod = (String) request.getSession().getAttribute("ramCod");
@@ -33,7 +32,8 @@
     /*Inserimento componenti nella tabella purchase*/
     try{
         db = new DBConnection();
-        mystmt = db.Connect();
+        conn = db.Connect();
+        mystmt = conn.createStatement();
         
         int ress;
         ress = mystmt.executeUpdate("insert into PURCHASES (MCOD, CPUCOD, RCOD, GCOD, HCOD, PCOD, CSCOD) values('"+mbcod+"', '"+cpucod+"', '"+ramcod+"', '"+gccod+"', '"+hdcod+"', '"+pscod+"', '"+casecod+"')");   

@@ -3,6 +3,8 @@
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="userc" scope="session" class="Components.UserCart"/>
+
 <%
     
     String mbcod = null;
@@ -17,12 +19,12 @@
         mbcod = new CookiesHandler().getCookie("MBCOD", request);
        
     }
-    mbField = new ComponentParser().getComponent("MOTHERBOARD", mbcod).replace("-CC-", " ");
+    mbField = new ComponentParser().getComponent(Integer.parseInt(mbcod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(mbcod)).getModel();
     String cpucod = null;
     
     if(request.getSession().getAttribute("cpuCod")!=null)
     {
-        cpucod = new ComponentParser().getComponent("CPU", cpucod);
+        cpucod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(cpucod)));
     }
     if(request.getSession().getAttribute("cpuCod")==null)
     {
@@ -30,7 +32,7 @@
        
     }
     
-    String cpuField = new ComponentParser().getComponent("CPU", cpucod).replace("-CC-", " ");
+    String cpuField = new ComponentParser().getComponent(Integer.parseInt(cpucod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(cpucod)).getModel();
     
     
     String ramcod = null;
@@ -41,7 +43,7 @@
     String ramField = null;
     if(request.getSession().getAttribute("ramCod")!=null)
     {
-        ramcod = new ComponentParser().getComponent("RAM", ramcod);
+        String.valueOf(new ComponentParser().getComponent(Integer.parseInt(ramcod)));
     }
     if(request.getSession().getAttribute("ramCod")==null)
     {
@@ -49,7 +51,7 @@
        
     }
     
-    ramField = new ComponentParser().getComponent("RAM", ramcod).replace("-CC-", " ");
+    ramField = new ComponentParser().getComponent(Integer.parseInt(ramcod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(ramcod)).getModel();
     
     String gccod = null;
     
@@ -59,7 +61,7 @@
     String gcField = null;
     if(request.getSession().getAttribute("gcCod")!=null)
     {
-        gccod = new ComponentParser().getComponent("GRAPHICS_CARD", gccod);
+        String.valueOf(new ComponentParser().getComponent(Integer.parseInt(gccod)));
     }
     if(request.getSession().getAttribute("gcCod")==null)
     {
@@ -67,7 +69,7 @@
        
     }
     
-    gcField = new ComponentParser().getComponent("GRAPHICS_CARD", gccod).replace("-CC-", " ");
+    gcField = new ComponentParser().getComponent(Integer.parseInt(gccod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(gccod)).getModel();
     
     
     Double price = null;
@@ -130,7 +132,7 @@
             </ul>
             <!-- Loading HDisk components in a table-->
             <%
-                out.println(new HTMLTableCreator().createHDrive(false));
+                out.println(new HTMLTableCreator(userc).createHDrive(false, Integer.parseInt(gccod)));
             %>
             <script>
                 var hdIndex;

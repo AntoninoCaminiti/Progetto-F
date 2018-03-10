@@ -1,74 +1,44 @@
 package JSPElements;
-import DatabaseElements.DBConnection;
 import java.sql.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-public class ComponentParser extends DBConnection {
-    
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet res = null;
-    
+import Components.Component;
+import DatabaseElements.DBComponentController;
+import Exceptions.ComponentLoadingException;
+public class ComponentParser {
+
     /**
-     * Create a statment to connect with database
-     * @throws SQLException if an SQL Exception is occurred
+     *
      */
-    public ComponentParser() throws SQLException
+    public ComponentParser()
     {
-        stmt = this.Connect();
+        
     }
     
     /**
      * Get a string of the brand and model of a component (using the string -CC- in order to split them) given its code 
-     * @param table the name's table that containing the component
      * @param cod the code of the corresponding component
      * @return the brand and the model of corresponding component
+     * @throws ComponentLoadingException is a component could not be loaded
      * @throws SQLException if an SQL exception is occurred
      */
-    public String getComponent(String table, String cod) throws SQLException
+    public Component getComponent(int cod) throws SQLException,ComponentLoadingException
     {
-        String output = " ";
-        
-        res = stmt.executeQuery("select * from " + table + " where cod = " + cod.trim());
-            while(res.next())
-            {
-                output = res.getString(2) + "-CC-" + res.getString(3);
-            }
-           
-        this.closeall();   
-        return output;
-    }                                                                                                                                                                                   
-    
-    /**
-     * Get the total price of a saved configuration given the set of codes in input
-     * @param data list of component's code (one code for every component) to calculate the total price
-     * @return total price of configuration
-     * @throws SQLException if an SQL exception is occurred 
-     */
-    public String getPrice(ArrayList data) throws SQLException
-    {
-        Double price = 0.0;
-        ArrayList<String> tables = new ArrayList<>();
-        
-        tables.add("MOTHERBOARD");
-        tables.add("CPU");
-        tables.add("RAM");
-        tables.add("GRAPHICS_CARD");
-        tables.add("HDRIVE");
-        tables.add("POWER_SUPPLY");
-        tables.add("PCCASE");
-        
-        for(int i = 0; i < tables.size(); i++)
-        {            
-            //System.out.println(tables.get(i) + " " + data.get(i));
-            res = stmt.executeQuery("select PRICE from " + tables.get(i)  + " where COD = "+ data.get(i));
-            while(res.next())
-            {
-                price += res.getDouble("PRICE");
-            }
+        Component cmp = null;
+        DBComponentController dbc = new DBComponentController();
+        ArrayList <Component> tmp = null;
+        if(cod>1000 && cod < 2000)  tmp = dbc.loadMB();
+        if(cod>2000 && cod < 3000)  tmp = dbc.loadCPU();
+        if(cod>3000 && cod < 4000)  tmp = dbc.loadRAM();
+        if(cod>4000 && cod < 5000)  tmp = dbc.loadGCard();
+        if(cod>5000 && cod < 6000)  tmp = dbc.loadMDrive();
+        if(cod>6000 && cod < 7000)  tmp = dbc.loadPS();
+        if(cod>7000 && cod < 8000)  tmp = dbc.loadCase();
+        for(int i = 0; i < tmp.size(); i++)
+        {
+            if(tmp.get(i).getCod() == cod)
+            cmp = tmp.get(i);
         }
-        DecimalFormat pricef = new DecimalFormat("#0.00 €");
-        this.closeall();
-        return pricef.format(price);
+        return cmp;
     }
+    
 }

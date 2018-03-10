@@ -7,6 +7,7 @@ import Exceptions.ComponentLoadingException;
 import Exceptions.NoCPUMatchedException;
 import Exceptions.NoRAMMatchedException;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  *
  * @author James Abbate
@@ -16,16 +17,14 @@ public class DBFiltersTest {
         DBFilters filterTest1 = null;
         try{
             //Connessione
-            
-            
-            DatabaseInit.getInstance().setConn("", "", "", "");
+            DatabaseInit.getInstance().setConn("localhost", "Components", "virtualAdmin", "virtualPWD20!8");
             filterTest1 = new DBFilters();
             
             //filterTest1.Connect();
             
-            CPULoader testCpu;
-            RAMLoader testRam;
-            MBLoader testMb = new DBComponentController().loadMB();
+            ArrayList <CPU> testCpu;
+            ArrayList <RAM> testRam;
+            ArrayList <Motherboard> testMb = new DBComponentController().loadMB();
             
             
             //Stampa la lista dei brand e  della motherboard
@@ -43,18 +42,18 @@ public class DBFiltersTest {
             //TEST filterCPU
             //Filtraggio CPU data codice di componente MB "ESISTENTE"
             testCpu = filterTest1.filterCPU("1016");
-            testCpu.printAll();
+            testCpu.toString();
             //Filtraggio CPU data codice di componente MB "NON ESISTENTE"
             testCpu = filterTest1.filterCPU("1604");
-            System.out.println(testCpu.listBrands());
+            System.out.println(testCpu.toString());
             
             //TEST filterRAM
             //Filtraggio RAM data brand e model di componente MB "ESISTENTE"
             testRam = filterTest1.filterRAM("ASRock", "970 EXTREME4");
-            System.out.println(testRam.listBrands());
+            System.out.println(testRam.toString());
             //Filtraggio RAM data brand e model di componente MB "NON ESISTENTE"
             testRam = filterTest1.filterRAM("Asus", "Z170-A");
-            System.out.println(testRam.listBrands());
+            System.out.println(testRam.toString());
         }
         catch(ComponentLoadingException ex)
         {

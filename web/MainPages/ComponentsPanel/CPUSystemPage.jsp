@@ -4,6 +4,8 @@
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+
+<jsp:useBean id="userc" scope="session" class="Components.UserCart"/>
 <%
     
     String mbcod = "";
@@ -30,9 +32,9 @@
     String model = null;
     if(mbcod != null)
     {
-        input = new ComponentParser().getComponent("MOTHERBOARD", mbcod).split("-CC-");
-        brand = input[0];
-        model = input[1];
+        
+        brand = new ComponentParser().getComponent(Integer.parseInt(mbcod)).getBrand();
+        model = new ComponentParser().getComponent(Integer.parseInt(mbcod)).getModel();
     }
     
     //CPU data init. for return case
@@ -40,7 +42,7 @@
     String cpucod = null;
     if((cpucod = (String) request.getSession().getAttribute("cpuCod"))!=null)
     {
-        cpuField = new ComponentParser().getComponent("CPU", cpucod);
+        cpuField = new ComponentParser().getComponent(Integer.parseInt(cpucod)).getBrand() + " " + new ComponentParser().getComponent(Integer.parseInt(cpucod)).getModel();
     }
 %>
 <!DOCTYPE html>
@@ -94,12 +96,13 @@
                 <!-- Loading CPU components in a table-->
                 <%
                     Boolean flagAdmin = new DBUserHandler().getCPUStatusConstr();
+                    System.out.println(mbcod+flagAdmin);
                     /*Default TRUE = Compatibilità*/
                     if(flagAdmin == true){
-                        out.print(new HTMLTableCreator().createCPU(false, flagAdmin, brand, model));
+                        out.print(new HTMLTableCreator(userc).createCPU(false, flagAdmin, Integer.parseInt(mbcod)));
                     }
                     if(flagAdmin == false){
-                        out.print(new HTMLTableCreator().createCPU(false, flagAdmin, brand, model));
+                        out.print(new HTMLTableCreator(userc).createCPU(false, flagAdmin, Integer.parseInt(mbcod)));
                     }
                 %>
                 <script>
@@ -139,7 +142,7 @@
                             document.getElementById("nextbtn").disabled = false;
                             
                             document.cookie = "CPUCOD="+document.getElementById("cpuCod").value;
-                           document.cookie = "PRICE="+document.getElementById("priceField").value;
+                           document.cookie = "PRICE="+document.getElementById("price").value;
                             //urlForward="RAMSystemPage.jsp?mbcod="+ document.getElementById("temp").value +"&cpucod=" + this.cells[7].innerHTML +"&priceField="+ document.getElementById("priceField").value;
                         };
                     }

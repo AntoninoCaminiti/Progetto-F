@@ -4,6 +4,7 @@
 <%@ page language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="userc" scope="session" class="Components.UserCart"/>
 <%
     
     String mbcod = null;
@@ -18,9 +19,11 @@
        
     }
     
-    String input [] = new ComponentParser().getComponent("MOTHERBOARD", mbcod).split("-CC-");
-    String brand = input[0];
-    String model = input[1];
+    String brand;
+    String model;
+    
+    brand = new ComponentParser().getComponent(Integer.parseInt(mbcod)).getBrand();
+    model = new ComponentParser().getComponent(Integer.parseInt(mbcod)).getModel();
     
     String cpucod = null;
     if(request.getSession().getAttribute("cpuCod")!=null)
@@ -36,7 +39,7 @@
     String cpuData = null;
     if(cpucod!=null)
     {
-        cpuData = new ComponentParser().getComponent("CPU", cpucod);
+        cpuData = new ComponentParser().getComponent(Integer.parseInt(cpucod)).getBrand() + "-CC-" + new ComponentParser().getComponent(Integer.parseInt(cpucod)).getModel();
     }
     
     Double price = null;
@@ -107,7 +110,7 @@
             <!-- Loading RAM components in a table-->
             <%
                 Boolean status = new DBUserHandler().getRAMStatusConstr();
-                out.print(new HTMLTableCreator().createRAM(false, status, brand, model));
+                out.print(new HTMLTableCreator(userc).createRAM(false, status, Integer.parseInt(mbcod), Integer.parseInt(cpucod)));
             %>
             <script>
                 var urlForward;

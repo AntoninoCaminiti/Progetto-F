@@ -5,27 +5,30 @@
  */
 package DatabaseElements;
 
-import Components.CPULoader;
-import Components.CaseLoader;
-import Components.GCardLoader;
-import Components.HDriveLoader;
-import Components.MBLoader;
-import Components.PSLoader;
-import Components.RAMLoader;
+import Components.CPU;
+import Components.PCCase;
+import Components.GraphicsCard;
+import Components.MemoryDrive;
+import Components.Motherboard;
+import Components.PowerSupply;
+import Components.RAM;
 import Exceptions.InsertComponentException;
 import Exceptions.ComponentLoadingException;
 import Exceptions.DeleteComponentException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
  * @author root
  */
-public class DBComponentController extends DBConnection{
+public class DBComponentController{
     
-    private Statement stmt = null;
+    private Connection conn = null;
+    private Statement mystmt = null;
     private ResultSet res = null;
     
     /**
@@ -34,7 +37,9 @@ public class DBComponentController extends DBConnection{
      */
     public DBComponentController() throws SQLException
     {
-        this.stmt = this.Connect();
+        DBConnection connection = new DBConnection();
+        conn = connection.Connect();
+        mystmt = conn.createStatement();
     }
     
     /**
@@ -43,23 +48,27 @@ public class DBComponentController extends DBConnection{
     * @throws ComponentLoadingException if a component could not be loaded
     * @return MBLoader the local object of the component gets returned in order to be assigned to an actual object
     */
-    public MBLoader loadMB() throws SQLException, ComponentLoadingException
+    public ArrayList loadMB() throws SQLException, ComponentLoadingException
     {
-        MBLoader mb = new MBLoader();
+        ArrayList<Motherboard> motherboardArr = new ArrayList<>();
+        
         res = mystmt.executeQuery("select * from MOTHERBOARD");
         
         if(res.isBeforeFirst())
         {
             while(res.next())
             {
-                mb.fillLoader(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getInt(7), res.getString(8), res.getInt(9), res.getInt(10), res.getDouble(11));
+                 motherboardArr.add(new Motherboard(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getInt(7), res.getString(8), res.getInt(9), res.getInt(10), res.getDouble(11)));
             }   
+            conn.close();
+            mystmt.close();
+            res.close();
         }
         else
         {
             throw new ComponentLoadingException();
         }   
-        return mb;
+        return motherboardArr;
             
     }
     
@@ -91,23 +100,26 @@ public class DBComponentController extends DBConnection{
      * @throws ComponentLoadingException if a component could not be loaded
      * @return CPULoader the local object of the component gets returned in order to be assigned to an actual object
      */
-    public CPULoader loadCPU() throws SQLException, ComponentLoadingException
+    public ArrayList loadCPU() throws SQLException, ComponentLoadingException
     {
-        CPULoader cpu = new CPULoader();
+        ArrayList <CPU> cpuArr = new ArrayList<>();
 
             res = mystmt.executeQuery("select * from CPU");
         if(res.isBeforeFirst())
         {
             while(res.next())
             {
-                cpu.fillLoader(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getDouble(5), res.getInt(6), res.getInt(7),  res.getDouble(8));
+                cpuArr.add(new CPU(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getDouble(5), res.getInt(6), res.getInt(7),  res.getDouble(8)));
             }
+            conn.close();
+            mystmt.close();
+            res.close();
         }
         else
         {
             throw new ComponentLoadingException();
         }
-        return cpu;
+        return cpuArr;
     }
 
     /**
@@ -135,22 +147,25 @@ public class DBComponentController extends DBConnection{
      * @throws ComponentLoadingException if a component could not be loaded
      * @return RAMLoader the local object of the component gets returned in order to be assigned to an actual object
      */
-    public RAMLoader loadRAM() throws SQLException, ComponentLoadingException
+    public ArrayList loadRAM() throws SQLException, ComponentLoadingException
     {
-        RAMLoader ram = new RAMLoader();
+        ArrayList <RAM> ramArr = new ArrayList<>();
         res = mystmt.executeQuery("select * from RAM");
         if(res.isBeforeFirst())
         {
             while(res.next())
             {
-                ram.fillLoader(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getInt(6), res.getInt(7), res.getInt(8), res.getInt(9), res.getDouble(10));
+                ramArr.add(new RAM(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getInt(6), res.getInt(7), res.getInt(8), res.getDouble(10)));
             }
+            conn.close();
+            mystmt.close();
+            res.close();
         }
         else
         {
             throw new ComponentLoadingException();
         }
-        return ram;
+        return ramArr;
     }
 
     /**
@@ -162,15 +177,15 @@ public class DBComponentController extends DBConnection{
      * @param tdp attribute of ram it's the power consumption of component
      * @param nom attribute of ram it's the number of modular of component
      * @param som attribute of ram it's the size of modular of component
-     * @param size attribute of ram it's the size of component
      * @param price attribute of ram it's the price of component
      * @throws SQLException if an SQL exception is occurred
      * @throws InsertComponentException propagated from checkExistingComponent
      */
-    public void filldbRAM(String brand, String model, String type, String speed, int tdp, int nom, int som, int size, Double price) throws SQLException, InsertComponentException
+    public void filldbRAM(String brand, String model, String type, String speed, int tdp, int nom, int som, Double price) throws SQLException, InsertComponentException
     {
             checkExistingComponent(brand, model, "RAM");
             int ress;
+            int size = nom*som;
             ress = mystmt.executeUpdate("insert into RAM (BRAND, MODEL, RAM_TYPE, SPEED, TDP, NUMBER_OF_MODULES, SIZE_OF_MODULES, SIZE, PRICE) values('"+brand+"', '"+model+"', '"+type+"', '"+speed+"', "+tdp+", "+nom+", "+som+ ","+ size +", "+price+")");
     }
        
@@ -180,24 +195,27 @@ public class DBComponentController extends DBConnection{
      * @throws ComponentLoadingException if a component could not be loaded
      * @return PSLoader the local object of the component gets returned in order to be assigned to an actual object
      */
-    public PSLoader loadPS() throws SQLException, ComponentLoadingException
+    public ArrayList loadPS() throws SQLException, ComponentLoadingException
     {
-        PSLoader ps = new PSLoader();
+        ArrayList <PowerSupply> power_supply = new ArrayList<>();
         res = mystmt.executeQuery("select * from POWER_SUPPLY");
         
         if(res.isBeforeFirst())
         {
             while(res.next())
             {
-                ps.fillLoader(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getInt(7), res.getString(8), res.getDouble(9));
+                power_supply.add(new PowerSupply(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getInt(7), res.getString(8), res.getDouble(9)));
             }
+            conn.close();
+            mystmt.close();
+            res.close();
         }
         else
         {
             throw new ComponentLoadingException();
         }
         
-        return ps;
+        return power_supply;
     }
 
     /**
@@ -226,23 +244,26 @@ public class DBComponentController extends DBConnection{
      * @throws ComponentLoadingException if a component could not be loaded
      * @return GCardLoader the local object of the component gets returned in order to be assigned to an actual object
      */
-    public GCardLoader loadGCard() throws SQLException, ComponentLoadingException
+    public ArrayList loadGCard() throws SQLException, ComponentLoadingException
     {
-        GCardLoader gc = new GCardLoader();
+        ArrayList <GraphicsCard> graphics_card = new ArrayList<>();
         res = mystmt.executeQuery("select * from GRAPHICS_CARD");
         
         if(res.isBeforeFirst())
         {
             while(res.next())
             {
-                gc.fillLoader(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getInt(6), res.getDouble(7), res.getInt(8), res.getInt(9),  res.getDouble(10));
+                graphics_card.add(new GraphicsCard(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getInt(6), res.getDouble(7), res.getInt(8), res.getInt(9),  res.getDouble(10)));
             }
+            conn.close();
+            mystmt.close();
+            res.close();
         }
         else
         {
             throw new ComponentLoadingException();
         }
-        return gc;
+        return graphics_card;
     }
     
     /**
@@ -272,23 +293,26 @@ public class DBComponentController extends DBConnection{
      * @throws ComponentLoadingException if a component could not be loaded
      * @return HDriveLoader the local object of the component gets returned in order to be assigned to an actual object
      */
-    public HDriveLoader loadHDrive() throws SQLException, ComponentLoadingException
+    public ArrayList loadMDrive() throws SQLException, ComponentLoadingException
     {
-        HDriveLoader hdd = new HDriveLoader();
+        ArrayList <MemoryDrive> memdrive = new ArrayList<>();
         res = mystmt.executeQuery("select * from HDRIVE");
         
         if(res.isBeforeFirst())
         {
             while(res.next())
             {
-                hdd.fillLoader(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getInt(7), res.getInt(8), res.getInt(9), res.getDouble(10));
+                memdrive.add(new MemoryDrive(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getInt(7), res.getInt(8), res.getInt(9), res.getDouble(10)));
             }
+            conn.close();
+            mystmt.close();
+            res.close();
         }
         else
         {
             throw new ComponentLoadingException();
         }
-        return hdd;
+        return memdrive;
     }
     
     /**
@@ -318,24 +342,27 @@ public class DBComponentController extends DBConnection{
      * @throws ComponentLoadingException if a component could not be loaded
      * @return CaseLoader the local object of the component gets returned in order to be assigned to an actual object
      */
-    public CaseLoader loadCase() throws SQLException, ComponentLoadingException
+    public ArrayList loadCase() throws SQLException, ComponentLoadingException
     {
-        CaseLoader c = new CaseLoader();
+        ArrayList <PCCase> caseArr = new ArrayList<>();
         res = mystmt.executeQuery("select * from PCCASE");
         
         if(res.isBeforeFirst())
         {
             while(res.next())
             {
-                c.fillLoader(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getDouble(7), res.getDouble(8));
+                caseArr.add(new PCCase(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getDouble(7), res.getDouble(8)));
             }
+            conn.close();
+            mystmt.close();
+            res.close();
         }
         else
         {
             throw new ComponentLoadingException();
         }
         
-        return c;
+        return caseArr;
     }
 
     /**
@@ -389,7 +416,14 @@ public class DBComponentController extends DBConnection{
             BRAND= res.getString(1).trim();
             MODEL = res.getString(2).trim();
             if(BRAND.equals(brand) && MODEL.equals(model)) throw new InsertComponentException();
+            conn.close();
+            mystmt.close();
+            res.close();
         }    
     }
+    
+    
+        
+    
     
 }

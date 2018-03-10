@@ -17,12 +17,12 @@
         mbcod = new CookiesHandler().getCookie("MBCOD", request);
        
     }
-    mbField = new ComponentParser().getComponent("MOTHERBOARD", mbcod).replace("-CC-", " ");
+    mbField = new ComponentParser().getComponent(Integer.parseInt(mbcod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(mbcod)).getModel();
     String cpucod = null;
     
     if(request.getSession().getAttribute("cpuCod")!=null)
     {
-        cpucod = new ComponentParser().getComponent("CPU", cpucod);
+        cpucod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(cpucod)));
     }
     if(request.getSession().getAttribute("cpuCod")==null)
     {
@@ -30,7 +30,7 @@
        
     }
     
-    String cpuField = new ComponentParser().getComponent("CPU", cpucod).replace("-CC-", " ");
+    String cpuField = new ComponentParser().getComponent(Integer.parseInt(cpucod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(cpucod)).getModel();
     
     
     String ramcod = null;
@@ -42,7 +42,7 @@
     String ramField = null;
     if(request.getSession().getAttribute("ramCod")!=null)
     {
-        ramcod = new ComponentParser().getComponent("RAM", ramcod);
+        ramcod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(ramcod)));
     }
     if(request.getSession().getAttribute("ramCod")==null)
     {
@@ -50,7 +50,7 @@
        
     }
     
-    ramField = new ComponentParser().getComponent("RAM", ramcod).replace("-CC-", " ");
+    ramField = new ComponentParser().getComponent(Integer.parseInt(ramcod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(ramcod)).getModel();
     
     String gccod = null;
     
@@ -61,7 +61,7 @@
     String gcField = null;
     if(request.getSession().getAttribute("gcCod")!=null)
     {
-        gccod = new ComponentParser().getComponent("GRAPHICS_CARD", gccod);
+        gccod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(gccod)));
     }
     if(request.getSession().getAttribute("gcCod")==null)
     {
@@ -69,7 +69,7 @@
        
     }
     
-    gcField = new ComponentParser().getComponent("GRAPHICS_CARD", gccod).replace("-CC-", " ");
+    gcField = new ComponentParser().getComponent(Integer.parseInt(gccod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(gccod)).getModel();
     
     
     String hdcod = null;
@@ -81,7 +81,7 @@
     String hdField = null;
     if(request.getSession().getAttribute("hdCod")!=null)
     {
-        hdcod = new ComponentParser().getComponent("HDRIVE", hdcod);
+        hdcod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(hdcod)));
     }
     if(request.getSession().getAttribute("hdCod")==null)
     {
@@ -89,7 +89,7 @@
        
     }
     
-    hdField = new ComponentParser().getComponent("HDRIVE", hdcod).replace("-CC-", " ");
+    hdField = new ComponentParser().getComponent(Integer.parseInt(hdcod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(hdcod)).getModel();
     
     String pscod = null;
     
@@ -99,7 +99,7 @@
     String psField = null;
     if(request.getSession().getAttribute("psCod")!=null)
     {
-        pscod = new ComponentParser().getComponent("POWER_SUPPLY", pscod);
+        pscod = String.valueOf(new ComponentParser().getComponent(Integer.parseInt(pscod)));
     }
     if(request.getSession().getAttribute("psCod")==null)
     {
@@ -107,7 +107,7 @@
        
     }
     
-    psField = new ComponentParser().getComponent("POWER_SUPPLY", pscod).replace("-CC-", " ");
+    psField = new ComponentParser().getComponent(Integer.parseInt(pscod)).getBrand()+ " " + new ComponentParser().getComponent(Integer.parseInt(pscod)).getModel();
     
     Double price = null;
     if(request.getParameter("price") != null){
@@ -169,7 +169,7 @@
             </ul>
             <!-- Loading HDisk components in a table-->
             <%
-                out.println(new HTMLTableCreator().createCase(false));
+                out.println(new HTMLTableCreator().createCase(false, Integer.parseInt(pscod)));
             %>
             <script>
                 var caseIndex;

@@ -5,12 +5,13 @@
  */
 package Test;
 
-import Components.CPULoader;
+import Components.CPU;
 import DatabaseElements.DBComponentController;
 import DatabaseElements.DatabaseInit;
 import Exceptions.ComponentLoadingException;
 import Exceptions.InsertComponentException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,11 +26,10 @@ public class DBComponentControllerTest {
             DatabaseInit.getInstance().setConn("", "", "", "");
             DBComponentController dbc = new DBComponentController();
             
-            CPULoader cpu = dbc.loadCPU();
-            cpu.printAll();
+            ArrayList <CPU> cpu = dbc.loadCPU();
+            cpu.toString();
             dbc.filldbCPU("AMD", "FX-8320", "AM3", 3.0, 5, 3, 179.0);
-            cpu.printAll();
-            dbc.closeall();
+            cpu.toString();
         }
         catch(InsertComponentException dbe){
             System.err.println(dbe.getMessage());

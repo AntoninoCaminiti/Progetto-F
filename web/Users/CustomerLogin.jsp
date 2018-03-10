@@ -6,8 +6,8 @@
     String userid = request.getParameter("uname");    
     String pwd = request.getParameter("pass");
     
-    
-    Statement st = new DBConnection().Connect();
+    Connection conn = new DBConnection().Connect();
+    Statement st = conn.createStatement();
     ResultSet rs;
     rs = st.executeQuery("select * from CustomerLogin where USERNAME='" + userid + "' and PASS='" + pwd + "'");
     if (rs.next()) {

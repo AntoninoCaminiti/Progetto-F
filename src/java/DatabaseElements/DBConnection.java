@@ -35,19 +35,28 @@ public class DBConnection
      * @return the statment of the connection
      * @throws SQLException if an SQL exception occurred
      */
-    public Statement Connect() throws SQLException
+    public Connection Connect() throws SQLException
     {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://"+ data.getHost() + ":3306/"+ data.getDatabase(), data.getUsername(), data.getPassword());
-            mystmt = conn.createStatement();
+            //mystmt = conn.createStatement();
         }
         catch(ClassNotFoundException ex)
         {
             System.err.println("Errore. Driver MySQL non trovato");
         }
         
-        return mystmt;
+        return conn;
+    }
+    
+    public ResultSet useQuery(String query) throws SQLException
+    {
+        if(query.toLowerCase().contains("select") || query.toLowerCase().contains("show"))
+        {
+            res = mystmt.executeQuery(query);
+        }
+        return res;
     }
 
     /**
